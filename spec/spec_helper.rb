@@ -11,4 +11,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:each, type: :graphql) do
+    binding.pry
+    RSpec::GraphqlResponse.reset_configuration
+  end
 end
