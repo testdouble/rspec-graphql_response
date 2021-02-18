@@ -1,6 +1,6 @@
 module Types
   module Response
-    class Character < Types::BaseObject
+    class Character < GraphQL::Schema::Object
       description "A character from a book, movie, or other show"
 
       field :id, ID, null: false
