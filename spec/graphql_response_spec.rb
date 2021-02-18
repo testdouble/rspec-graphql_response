@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphqlResponse, type: :graphql do
+RSpec.describe RSpec::GraphQL::Response, type: :graphql do
   before do
     described_class.configure do |config|
       config.graphql_schema = ExampleSchema
@@ -6,7 +6,7 @@ RSpec.describe RSpec::GraphqlResponse, type: :graphql do
   end
 
   it "has a version number" do
-    expect(Rspec::GraphqlResponse::VERSION).not_to be nil
+    expect(Rspec::GraphQL::Response::VERSION).not_to be nil
   end
 
   it "checks for a successful response" do

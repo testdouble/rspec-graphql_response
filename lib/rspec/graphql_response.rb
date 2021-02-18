@@ -2,38 +2,40 @@ require "rspec/graphql_response/version"
 require "rspec/graphql_response/configuration"
 
 module RSpec
-  module GraphqlResponse
-    extend RSpec::Matchers::DSL
+  module GraphQL
+    module Response
+      extend RSpec::Matchers::DSL
 
-    def self.configure(&block)
-      return if block.nil?
+      def self.configure(&block)
+        return if block.nil?
 
-      block.call(configuration)
-    end
+        block.call(configuration)
+      end
 
-    def self.configuration
-      @configuration ||= Configuration.new
-    end
+      def self.configuration
+        @configuration ||= Configuration.new
+      end
 
-    def self.reset_configuration
-      @configuration = nil
-    end
+      def self.reset_configuration
+        @configuration = nil
+      end
 
-    def execute_graphql
-      config = self.configuration
-      raise "GraphQL Schema not found. Please set config.graphql_schema = ..." if config.nil?
+      def execute_graphql
+        config = GraphQL::Response.configuration
+        raise "GraphQL Schema not found. Please set config.graphql_schema = ..." if config.nil?
 
-      config.graphql_schema.execute(
+        config.graphql_schema.execute(
 
-      )
-    end
+        )
+      end
 
-    def response
-      execute_graphql.to_h
-    end
+      def response
+        execute_graphql.to_h
+      end
   end
 
   RSpec.configure do |config|
-    config.include RSpec::GraphqlResponse, :type => :graphql
+    config.include RSpec::GraphQL::Response, :type => :graphql
+  end
   end
 end

@@ -4,7 +4,7 @@ require "rspec/graphql_response/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "rspec-graphql_response"
-  spec.version       = Rspec::GraphqlResponse::VERSION
+  spec.version       = Rspec::GraphQL::Response::VERSION
   spec.authors       = ["River Lynn Bailey"]
   spec.email         = ["riverl.bailey@testdouble.com"]
 
