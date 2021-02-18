@@ -1,4 +1,15 @@
 RSpec.describe RSpec::GraphQL::Response, type: :graphql do
+  let(:query) do
+    <<~GQL
+      query CharacterList {
+        characters {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
   before do
     described_class.configure do |config|
       config.graphql_schema = ExampleSchema
