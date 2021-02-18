@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "rspec/graphql_response"
+require "pry-byebug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
