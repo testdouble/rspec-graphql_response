@@ -1,4 +1,4 @@
-RSpec.describe Rspec::GraphqlResponse, type: :graphql do
+RSpec.describe RSpec::GraphqlResponse, type: :graphql do
   before do
     described_class.configure do |config|
       config.graphql_schema = ExampleSchema

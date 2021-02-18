@@ -14,7 +14,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :graphql) do
-    binding.pry
     RSpec::GraphqlResponse.reset_configuration
   end
 end
