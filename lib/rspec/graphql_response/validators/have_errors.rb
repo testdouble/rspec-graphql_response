@@ -4,7 +4,8 @@ module RSpec
       class HaveErrors
 
         MESSAGES = {
-          nil: "Cannot evaluate nil for errors"
+          nil: "Cannot evaluate nil for errors",
+          none: "Expected response to have errors, but found none"
         }
 
         attr_reader :response, :expected_messages, :with_messages
@@ -19,7 +20,7 @@ module RSpec
           return fail_validation(:nil) if response.nil?
 
           errors = response.fetch("errors", [])
-          return fail_validation if errors.length == 0
+          return fail_validation(:none) if errors.length == 0
 
           if with_messages
             actual_messages = errors.map {|e| e["message"] }

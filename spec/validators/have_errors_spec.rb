@@ -19,9 +19,18 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   context "nil response" do
     let(:response) { }
 
-    it "can't validate nil" do
+    it "is invalid" do
       expect(validation.valid?).to be_falsey
       expect(validation.reason).to eq("Cannot evaluate nil for errors")
+    end
+  end
+
+  context "no errors" do
+    let(:response) { {} }
+
+    it "is invalid" do
+      expect(validation.valid?).to be_falsey
+      expect(validation.reason).to eq("Expected response to have errors, but found none")
     end
   end
 
