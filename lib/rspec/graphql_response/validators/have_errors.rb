@@ -5,7 +5,6 @@ module RSpec
         attr_reader :response, :expected_messages, :with_messages
 
         def initialize(response, expected_messages: [])
-          @errors = []
           @response = response
           @expected_messages = Array(expected_messages)
           @with_messages = @expected_messages.length > 0
