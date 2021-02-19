@@ -16,6 +16,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :graphql) do
-    RSpec::GraphQL::Response.reset_configuration
+    RSpec::GraphQLResponse.reset_configuration
   end
 end

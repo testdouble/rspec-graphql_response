@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphQL::Response, type: :graphql do
+RSpec.describe RSpec::GraphQLResponse, type: :graphql do
   let(:query) do
     <<~GQL
       query CharacterList {
@@ -17,18 +17,12 @@ RSpec.describe RSpec::GraphQL::Response, type: :graphql do
   end
 
   it "has a version number" do
-    expect(Rspec::GraphQL::Response::VERSION).not_to be nil
-  end
-
-  it "checks for a successful response" do
-    expect(response).to be_successful
-  end
-
-  it "checks for a failed response" do
-    expect(response).to_not be_successful
+    expect(Rspec::GraphQLResponse::VERSION).not_to be nil
   end
 
   context "unhandled errors" do
+    let(:query){ }
+
     context "no error count specified" do
       it "checks for unhandled errors" do
         expect(response).to have_errors
