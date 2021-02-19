@@ -5,7 +5,8 @@ module RSpec
 
         MESSAGES = {
           nil: "Cannot evaluate nil for errors",
-          none: "Expected response to have errors, but found none"
+          none: "Expected response to have errors, but found none",
+          unmatched: ->(expected, actual) { "Expected\n\t#{expected.inspect}\nbut found\n\t#{actual.inspect}" }
         }
 
         attr_reader :response, :expected_messages, :with_messages
@@ -24,15 +25,9 @@ module RSpec
 
           if with_messages
             actual_messages = errors.map {|e| e["message"] }
+            unmatched_messages = expected_messages.difference(actual_messages)
 
-            # they must match in count
-            return fail_validation if expected_messages.length != actual_messages.length
-
-            # join the two arrays, where items in each array match
-            unmatched_messages = expected_messages & actual_messages
-
-            # they must match in content. check for no messages matched
-            return fail_validation if unmatched_messages.length == 0
+            return fail_validation(:unmatched, expected_messages, actual_messages) if unmatched_messages.any?
           end
 
           ValidationResult.pass
@@ -40,8 +35,14 @@ module RSpec
 
         private
 
-        def fail_validation(reason)
-          ValidationResult.fail(MESSAGES[reason])
+        def fail_validation(reason, *args)
+          message = MESSAGES[reason]
+
+          if message.is_a? Proc
+            message = message.call(*args)
+          end
+
+          ValidationResult.fail(message)
         end
       end
     end

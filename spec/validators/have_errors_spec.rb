@@ -34,15 +34,24 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
   end
 
-  context "correctly specified messages" do
+  context "correct message expected" do
     let(:expected_messages) { ["No query string was present"] }
 
-    it "validates" do
+    it "is valid" do
       expect(validation.valid?).to be_truthy
     end
   end
 
-  context "incorrectly specified messages" do
+  context "too many expected messages" do
+    let(:expected_messages) { ["No query string was present", "Error 2"] }
+    
+    it "is invalid" do
+      expect(validation.valid?).to be_falsey
+      expect(validation.reason).to eq("Expected\n\t[\"No query string was present\", \"Error 2\"]\nbut found\n\t[\"No query string was present\"]")
+    end
+  end
+
+  context "incorrect message expected" do
     let(:expected_messages) { ["wrong error message"] }
 
     it "does not validate" do
