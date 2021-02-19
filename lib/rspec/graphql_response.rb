@@ -1,6 +1,6 @@
 require "rspec/graphql_response/version"
 require "rspec/graphql_response/configuration"
-require "rspec/graphql_response/matchers/be_successful"
+require "rspec/graphql_response/matchers/have_errors"
 
 module RSpec
   module GraphQLResponse
