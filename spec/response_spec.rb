@@ -1,4 +1,4 @@
-RSpec.describe "GrapQL Execution", type: :graphql do
+RSpec.describe "Built-In GrapQL Response", type: :graphql do
   let(:query) do
     <<~GQL
       query CharacterList {
