@@ -3,27 +3,25 @@ require "rspec/graphql_response/matchers/have_errors"
 RSpec.describe RSpec::GraphQLResponse::Matchers::HaveErrors do
   include described_class
 
-  let(:expected_messages) { [] }
+  context "with errors" do
+    let(:response) do 
+      {
+        "errors" => [{"message" => "No query string was present"}]
+      }
+    end
 
-  let(:response) do 
-    {
-      "errors" => [{"message" => "No query string was present"}]
-    }
+    it "checks for errors" do
+      expect(response).to have_errors
+    end
   end
 
-  context "unhandled errors" do
-    context "no error count specified" do
-      it "checks for unhandled errors" do
-        expect(response).to have_errors
-      end
+  context "with errors" do
+    let(:response) do 
+      {}
+    end
 
-      it "checks for errors with specific messages" do
-        expect(response).to have_errors.with_messages("No query string was present")
-      end
-
-      it "fails if error messages don't match" do
-        expect(response).to have_errors.with_messages("wrong error message")
-      end
+    it "checks for no errors" do
+      expect(response).to_not have_errors
     end
   end
 end
