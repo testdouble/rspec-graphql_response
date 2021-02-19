@@ -1,5 +1,6 @@
 RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   let(:expected_messages) { [] }
+
   let(:response) do 
     {
       "errors" => [{"message" => "No query string was present"}]

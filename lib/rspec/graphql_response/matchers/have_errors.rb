@@ -3,7 +3,7 @@ require "rspec/graphql_response/validators/have_errors"
 module RSpec
   module GraphQLResponse
     module Matchers
-      module BeSuccessful
+      module HaveErrors
         extend RSpec::Matchers::DSL
 
         matcher :have_errors do

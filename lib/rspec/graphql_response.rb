@@ -5,7 +5,7 @@ require "rspec/graphql_response/matchers/have_errors"
 module RSpec
   module GraphQLResponse
     extend RSpec::Matchers::DSL
-    include RSpec::GraphQLResponse::Matchers::BeSuccessful
+    include RSpec::GraphQLResponse::Matchers::HaveErrors
 
     def self.configure(&block)
       return if block.nil?

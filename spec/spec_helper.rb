@@ -17,5 +17,8 @@ RSpec.configure do |config|
 
   config.before(:each, type: :graphql) do
     RSpec::GraphQLResponse.reset_configuration
+    RSpec::GraphQLResponse.configure do |config|
+      config.graphql_schema = ExampleSchema
+    end
   end
 end
