@@ -6,19 +6,23 @@ module RSpec
           self.new(true)
         end
 
-        def self.fail(message)
-          self.new(false, message)
+        def self.fail(reason)
+          self.new(false, reason)
         end
 
         def valid?
           @is_valid
         end
 
+        def reason(negated: false)
+          @reason
+        end
+
         private
 
-        def initialize(is_valid, message = nil)
+        def initialize(is_valid, reason = nil)
           @is_valid = is_valid
-          @message = message
+          @reason = reason
         end
       end
     end

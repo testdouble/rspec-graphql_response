@@ -12,8 +12,17 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     validator.validate
   end
 
-  it "validates when errors are present" do
+  it "validates" do
     expect(validation.valid?).to be_truthy
+  end
+
+  context "nil response" do
+    let(:response) { }
+
+    it "can't validate nil" do
+      expect(validation.valid?).to be_falsey
+      expect(validation.reason).to eq("Cannot evaluate nil for errors")
+    end
   end
 
   context "correctly specified messages" do
@@ -32,9 +41,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides a description of the problem" do
-      expect(validation.errors).to include(
-        "No query string was present"
-      )
+      expect(validation.reason).to eq("No query string was present")
     end
   end
 end

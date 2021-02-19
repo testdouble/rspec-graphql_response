@@ -2,6 +2,11 @@ module RSpec
   module GraphQLResponse
     module Validators
       class HaveErrors
+
+        MESSAGES = {
+          nil: "Cannot evaluate nil for errors"
+        }
+
         attr_reader :response, :expected_messages, :with_messages
 
         def initialize(response, expected_messages: [])
@@ -11,7 +16,7 @@ module RSpec
         end
 
         def validate
-          return fail_validation if response.nil?
+          return fail_validation(:nil) if response.nil?
 
           errors = response.fetch("errors", [])
           return fail_validation if errors.length == 0
@@ -34,8 +39,8 @@ module RSpec
 
         private
 
-        def fail_validation
-          Validators::ValidationResult.fail "some error"
+        def fail_validation(reason)
+          ValidationResult.fail(MESSAGES[reason])
         end
       end
     end
