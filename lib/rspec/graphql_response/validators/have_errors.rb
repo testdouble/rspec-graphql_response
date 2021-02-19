@@ -29,17 +29,13 @@ module RSpec
             return fail_validation if unmatched_messages.length == 0
           end
 
-          pass_validation
+          ValidationResult.pass
         end
 
         private
 
         def fail_validation
-          return false
-        end
-
-        def pass_validation
-          true
+          Validators::ValidationResult.fail "some error"
         end
       end
     end

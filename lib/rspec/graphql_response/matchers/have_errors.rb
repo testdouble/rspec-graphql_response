@@ -1,5 +1,3 @@
-require "rspec/graphql_response/validators/have_errors"
-
 module RSpec
   module GraphQLResponse
     module Matchers
