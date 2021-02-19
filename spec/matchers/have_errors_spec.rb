@@ -1,5 +1,3 @@
-require "rspec/graphql_response/matchers/have_errors"
-
 RSpec.describe RSpec::GraphQLResponse::Matchers::HaveErrors do
   include described_class
 
