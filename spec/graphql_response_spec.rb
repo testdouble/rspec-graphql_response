@@ -29,14 +29,12 @@ RSpec.describe RSpec::GraphQLResponse, type: :graphql do
       end
 
       it "checks for errors with specific messages" do
-        expect(response).to have_errors.with_messages("error 1")
+        expect(response).to have_errors.with_messages("No query string was present")
       end
 
-      it "allows more errors than specified" do
-        expect(response).to have_errors.with_messages("error 2")
+      it "fails if error messages don't match" do
+        expect(response).to have_errors.with_messages("wrong error message")
       end
-
-      it "does not allow fewer errors than specified"
     end
 
     context "error count specified" do

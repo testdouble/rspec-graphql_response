@@ -1,3 +1,5 @@
+require "rspec/graphql_response/validators/have_errors"
+
 module RSpec
   module GraphQLResponse
     module Matchers
@@ -6,11 +8,13 @@ module RSpec
 
         matcher :have_errors do
           match do |response|
-            return false if response.nil?
-            return response.fetch("errors", []).length > 0
+            have_errors = Validators::HaveErrors.new(response, expected_messages: @messages)
+            return have_errors.validate
           end
 
-          match_when_negated { false }
+          chain :with_messages do |*messages|
+            @messages = messages
+          end
         end
       end
     end
