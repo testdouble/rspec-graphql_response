@@ -15,12 +15,19 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     expect(validate).to be_truthy
   end
 
-  it "checks for errors with specific messages" do
-    # expect(response).to have_errors.with_messages("No query string was present")
+  context "correctly specified messages" do
+    let(:expected_messages) { ["No query string was present"] }
+
+    it "validates" do
+      expect(validate).to be_truthy
+    end
   end
 
-  it "fails if error messages don't match" do
-    # expect(response).to have_errors.with_messages("wrong error message")
-  end
+  context "incorrectly specified messages" do
+    let(:expected_messages) { ["wrong error message"] }
 
+    it "does not validate when messages don't match" do
+      expect(validate).to be_falsey
+    end
+  end
 end
