@@ -25,7 +25,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   context "nil response" do
     let(:response) { }
 
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
       expect(have_errors.reason).to eq("Cannot evaluate nil for errors")
     end
@@ -34,7 +34,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   context "no errors" do
     let(:response) { {} }
 
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
       expect(have_errors.reason).to eq("Expected response to have errors, but found none")
     end
@@ -51,7 +51,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   context "too many expected messages" do
     let(:expected_messages) { ["No query string was present", "Error 2"] }
     
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
     end
 
@@ -83,7 +83,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   context "with expected error count not matching actual error count" do
     let(:expected_count) { 2 }
 
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
     end
 
@@ -96,7 +96,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     let(:expected_count) { 3 }
     let(:expected_messages) { ["No query string was present", "Error 2"] }
 
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
     end
 
@@ -109,7 +109,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     let(:expected_count) { 1 }
     let(:expected_messages) { ["No query string was present", "Error 2"] }
 
-    it "is invalid" do
+    it "is not valid" do
       expect(have_errors.valid?).to be_falsey
     end
 
