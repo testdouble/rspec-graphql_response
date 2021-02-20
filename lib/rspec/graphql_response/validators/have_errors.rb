@@ -12,6 +12,9 @@ module RSpec
 
         NEGATED_MESSAGES = {
           nil: "Cannot evaluate nil for errors",
+          none: ->(_, actual) { "Expected response not to have errors, but found\n\t#{actual.inspect}" },
+          unmatched: ->(expected, actual) { "Expected not to find\n\t#{expected.inspect}\nbut found\n\t#{actual.inspect}" },
+          length: ->(expected, actual) { "Expected response not to have #{expected} errors, but found #{actual}" }
         }
 
         attr_reader :response, :expected_messages, :with_messages, :expected_count, :with_count
@@ -30,7 +33,7 @@ module RSpec
           return fail_validation(:nil) if response.nil?
 
           errors = response.fetch("errors", [])
-          return fail_validation(:none) if errors.length == 0
+          return fail_validation(:none, nil, errors) if errors.length == 0
 
           if with_count
             actual_count = errors.length
