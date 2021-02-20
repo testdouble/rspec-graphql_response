@@ -1,8 +1,7 @@
 module RSpec
   module GraphQLResponse
     module Validators
-      class HaveErrors
-
+      class HaveErrors < ValidationBase
         MESSAGES = {
           nil: "Cannot evaluate nil for errors",
           none: "Expected response to have errors, but found none",
@@ -47,15 +46,7 @@ module RSpec
             return fail_validation(:unmatched, expected_messages, actual_messages) if unmatched_messages.any?
           end
 
-          ValidationResult.pass
-        end
-
-        private
-
-        def fail_validation(reason_type, *args)
-          message = MESSAGES[reason_type]
-          negated_message = NEGATED_MESSAGES[reason_type]
-          ValidationResult.fail(message, negated_message, args)
+          pass_validation 
         end
       end
     end
