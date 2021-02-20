@@ -36,7 +36,7 @@ RSpec.describe RSpec::GraphQLResponse::Matchers::HaveErrors do
       expect(response).to_not have_errors(1).with_messages("No query string was present")
     end
 
-    it "invalidates with incorrect error count" do
+    it "invalidates when expecting errors" do
       expect { 
         expect(response).to have_errors
       }.to raise_error("Expected response to have errors, but found none")
