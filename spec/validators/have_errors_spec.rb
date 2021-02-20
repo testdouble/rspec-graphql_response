@@ -35,6 +35,8 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
 
     it "is not valid" do
       expect(have_errors.valid?).to be_falsey
+
+    it "provides a reason" do
       expect(have_errors.reason).to eq("Cannot evaluate nil for errors")
     end
   end
@@ -44,6 +46,8 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
 
     it "is not valid" do
       expect(have_errors.valid?).to be_falsey
+
+    it "provides a reason" do
       expect(have_errors.reason).to eq("Expected response to have errors, but found none")
     end
   end
