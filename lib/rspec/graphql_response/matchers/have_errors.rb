@@ -4,9 +4,13 @@ module RSpec
       module HaveErrors
         extend RSpec::Matchers::DSL
 
-        matcher :have_errors do |count|
+        matcher :have_errors do |count = nil|
           match do |response|
-            have_errors = Validators::HaveErrors.new(response, expected_count: count, expected_messages: @messages)
+            have_errors = Validators::HaveErrors.new(
+              response,
+              expected_count: count,
+              expected_messages: @messages
+            )
 
             @result = have_errors.validate
             @result.valid?
