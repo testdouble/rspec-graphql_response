@@ -11,7 +11,7 @@ module RSpec
         }
 
         NEGATED_MESSAGES = {
-
+          nil: "Cannot evaluate nil for errors",
         }
 
         attr_reader :response, :expected_messages, :with_messages, :expected_count, :with_count
