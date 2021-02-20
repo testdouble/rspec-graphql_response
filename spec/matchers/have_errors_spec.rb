@@ -8,18 +8,26 @@ RSpec.describe RSpec::GraphQLResponse::Matchers::HaveErrors do
       }
     end
 
-    it "checks for errors" do
+    it "validates errors" do
       expect(response).to have_errors
+    end
+
+    it "validates error count and message" do
+      expect(response).to have_errors(1).with_messages("No query string was present")
     end
   end
 
-  context "with errors" do
+  context "without errors" do
     let(:response) do 
       {}
     end
 
-    it "checks for no errors" do
+    it "validates no errors" do
       expect(response).to_not have_errors
+    end
+
+    it "validates no error count and or messages" do
+      expect(response).to_not have_errors(1).with_messages("No query string was present")
     end
   end
 end

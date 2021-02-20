@@ -6,17 +6,18 @@ module RSpec
 
         matcher :have_errors do
           match do |response|
-            @have_errors = Validators::HaveErrors.new(response, expected_messages: @messages)
+            have_errors = Validators::HaveErrors.new(response, expected_messages: @messages)
 
-            return @have_errors.validate
+            @result = have_errors.validate
+            @result.valid?
           end
 
           failure_message do |response|
-            @have_errors.reason
+            @reason.reason
           end
 
           failure_message_when_negated do |response|
-            @have_errors.negated_reason
+            @reason.negated_reason
           end
 
           chain :with_messages do |*messages|
