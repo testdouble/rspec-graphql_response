@@ -18,6 +18,14 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     validator.validate
   end
 
+  let(:actual_messages) do
+    response.fetch("errors", []).map{ |e| e["message"] }
+  end
+
+  let(:actual_count) do
+    response.fetch("errors", []).length
+  end
+
   it "validates" do
     expect(have_errors.valid?).to be_truthy
   end
@@ -56,7 +64,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides a reason" do
-      expect(have_errors.reason).to eq("Expected\n\t[\"No query string was present\", \"Error 2\"]\nbut found\n\t[\"No query string was present\"]")
+      expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
   end
 
@@ -68,7 +76,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides a reason" do
-      expect(have_errors.reason).to eq("Expected\n\t[\"wrong error message\"]\nbut found\n\t[\"No query string was present\"]")
+      expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
   end
 
@@ -88,7 +96,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides a reason" do
-      expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found 1")
+      expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found #{actual_count}")
     end
   end
 
@@ -101,7 +109,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides the unmatched error count reason" do
-      expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found 1")
+      expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found #{actual_count}")
     end
   end
 
@@ -114,7 +122,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
     end
 
     it "provides the unmatched error count reason" do
-      expect(have_errors.reason).to eq("Expected\n\t[\"No query string was present\", \"Error 2\"]\nbut found\n\t[\"No query string was present\"]")
+      expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
   end
 end
