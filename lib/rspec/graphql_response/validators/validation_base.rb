@@ -3,12 +3,12 @@ module RSpec
     module Validators
       class ValidationBase
         class << self
-          def message(type, msg)
+          def failure_message(type, msg)
             @messages ||= {}
             @messages[type] = msg
           end
 
-          def negated_message(type, msg)
+          def failure_message_negated(type, msg)
             @negated_messages ||= {}
             @negated_messages[type] = msg
           end
