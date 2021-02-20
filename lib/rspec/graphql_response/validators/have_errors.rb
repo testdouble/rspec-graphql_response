@@ -10,6 +10,10 @@ module RSpec
           length: ->(expected, actual) { "Expected response to have #{expected} errors, but found #{actual}" }
         }
 
+        NEGATED_MESSAGES = {
+
+        }
+
         attr_reader :response, :expected_messages, :with_messages, :expected_count, :with_count
 
         def initialize(response, expected_messages: [], expected_count: nil)
@@ -45,14 +49,10 @@ module RSpec
 
         private
 
-        def fail_validation(reason, *args)
-          message = MESSAGES[reason]
-
-          if message.is_a? Proc
-            message = message.call(*args)
-          end
-
-          ValidationResult.fail(message)
+        def fail_validation(reason_type, *args)
+          message = MESSAGES[reason_type]
+          negated_message = NEGATED_MESSAGES[reason_type]
+          ValidationResult.fail(message, negated_message, args)
         end
       end
     end
