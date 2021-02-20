@@ -2,16 +2,38 @@ module RSpec
   module GraphQLResponse
     module Validators
       class ValidationBase
+        class << self
+          def message(type, msg)
+            @messages ||= {}
+            @messages[type] = msg
+          end
+
+          def negated_message(type, msg)
+            @negated_messages ||= {}
+            @negated_messages[type] = msg
+          end
+        end
+
         protected
 
-        def fail_validation(reason_type, *args)
-          message = self.class::MESSAGES[reason_type]
-          negated_message = self.class::NEGATED_MESSAGES[reason_type]
+        def fail_validation(type, *args)
+          message = failure_message(type)
+          negated_message = failure_message_negated(type)
           ValidationResult.fail(message, negated_message, args)
         end
 
         def pass_validation
           ValidationResult.pass
+        end
+
+        private
+
+        def failure_message(type)
+          self.class.instance_variable_get(:@messages)[type]
+        end
+
+        def failure_message_negated(type)
+          self.class.instance_variable_get(:@negated_messages)[type]
         end
       end
     end
