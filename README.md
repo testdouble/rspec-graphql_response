@@ -114,7 +114,7 @@ RSpec.describe Some::Thing, type: :graphql do
   end
 
   it "executes the query" do
-    response = execute_query.to_h
+    response = execute_graphql.to_h
 
     # expect(response) ...
   end
@@ -123,7 +123,7 @@ end
 
 #### Use the Built-In `response`
 
-The reduction in code is good, but the copy & paste of `response = execute_query.to_h` will quickly become an issue in the same
+The reduction in code is good, but the copy & paste of `response = execute_graphql.to_h` will quickly become an issue in the same
 way. The reduce this, `RSpec::GraphQLResponse` provides a built-in `response` helper.
 
 ```ruby
