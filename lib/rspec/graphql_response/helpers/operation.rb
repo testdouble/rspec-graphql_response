@@ -1,11 +1,5 @@
-module RSpec
-  module GraphQLResponse
-    module Helpers
-      def operation(name)
-        return nil unless response.is_a? Hash
+RSpec::GraphQLResponse.add_helper :operation do |name|
+  return nil unless response.is_a? Hash
 
-        response.dig("data", name.to_s)
-      end
-    end
-  end
+  response.dig("data", name.to_s)
 end

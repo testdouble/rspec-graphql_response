@@ -1,10 +1,12 @@
-# this must come first, so we can build the module
-# with the extend RSpec Matchers DSL before
-# defining the custom matchers
 module RSpec
   module GraphQLResponse
-    module Matchers
-      extend RSpec::Matchers::DSL
+    def self.add_matcher(name, &matcher)
+      matcher = Module.new do |mod|
+        extend RSpec::Matchers::DSL
+        matcher(name, &matcher)
+      end
+
+      self.include(matcher)
     end
   end
 end

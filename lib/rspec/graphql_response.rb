@@ -5,9 +5,6 @@ require_relative "graphql_response/helpers"
 
 module RSpec
   module GraphQLResponse
-    include RSpec::GraphQLResponse::Matchers
-    include RSpec::GraphQLResponse::Helpers
-
     def self.configure(&block)
       return if block.nil?
 
