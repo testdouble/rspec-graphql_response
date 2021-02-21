@@ -1,10 +1,12 @@
 require_relative "graphql_response/configuration"
 require_relative "graphql_response/validators"
 require_relative "graphql_response/matchers"
+require_relative "graphql_response/helpers"
 
 module RSpec
   module GraphQLResponse
-    include RSpec::GraphQLResponse::Matchers::HaveErrors
+    include RSpec::GraphQLResponse::Matchers
+    include RSpec::GraphQLResponse::Helpers
 
     def self.configure(&block)
       return if block.nil?

@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphQLResponse::Matchers::HaveErrors do
+RSpec.describe RSpec::GraphQLResponse::Matchers, "have_errors" do
   include described_class
 
   context "with errors" do
