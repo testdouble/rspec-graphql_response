@@ -1,12 +1,11 @@
 # Rspec::GraphQLResponse
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/graphql_response`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+RSpec::GraphQLResponse provides a series of RSpec matchers, helper methods, and other configuration to help simplify
+the testing of responses from the `graphql-ruby` gem and the `<GraphQLSchemaName>.execute` method.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Your app must have `graphql-ruby` and `rspec`. With that done, add this line to your application's Gemfile:
 
 ```ruby
 gem 'rspec-graphql_response'
@@ -22,7 +21,152 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
+a GraphQL Schema `.execute`. These include:
+
+Spec types:
+
+* `:graphql`
+
+Helper methods:
+
+* `execute_graphql`
+* `response`
+* `operation`
+
+Matchers:
+
+* `have_errors`
+
+### The `:graphql` Spec Type
+
+To use these custom helpers and matchers, you need to specificy `type: :graphql` as part of your spec's description. For exmaple,
+
+```ruby
+RSpec.describe Some::Thing, type: :graphql do
+
+  # ... 
+
+end
+```
+
+With this `type` set, your specs will have access to all of the `RSpec::GraphQLResponse` code.
+
+### Helper Methods
+
+Executing a GraphQL call from RSpec is not the most challening code to write:
+
+```ruby
+let(:query) do
+  <<-GQL
+    query ListCharacters{
+      characters {
+        id
+        name
+      }
+    }
+  GQL
+end
+
+subject do
+  MySchema.execute(some_query)
+end
+
+it "does something" do
+  response = subject.to_h
+
+  # expect(response) ...
+end
+```
+
+But copy & paste is often considered a design error, and this code is likely going to be littered throughout your spec files.
+
+#### Use the Built-In `execute_graphql`
+
+To help reduce the copy & paste, `RSpec::GraphQLResponse` has a built-in `execute_graphql` method that looks for a `query` variable
+in your specs.
+
+```ruby
+RSpec.describe Some::Thing, type: :graphql do
+  let(:query) do
+    <<-GQL
+      query ListCharacters{
+        characters {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
+  it "executes the query" do
+    response = execute_query.to_h
+
+    # expect(response) ...
+  end
+end
+```
+
+#### Use the Built-In `response`
+
+The reduction in code is good, but the copy & paste of `response = execute_query.to_h` will quickly become an issue in the same
+way. The reduce this, `RSpec::GraphQLResponse` provides a built-in `response` helper.
+
+```ruby
+RSpec.describe Some::Thing, type: :graphql do
+  let(:query) do
+    <<-GQL
+      query {
+        characters {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
+  it "executes the query" do
+    expect(response).to include(
+      "data" => {
+        "characters" => { ... }
+      }
+    )
+  end
+end
+```
+
+#### Retrieve operation results with `operation`
+
+Now that the GraphQL query has been executed and a response has been obtained, it's time to check for the results of a GraphQL
+operation. In the previous example, the spec is expecting to find `data` with `characters` in the response hash. To reduce the
+nested hash checking, use the built-in `operation` method to retrieve the `characters`:
+
+```ruby
+RSpec.describe Some::Thing, type: :graphql do
+  let(:query) do
+    <<-GQL
+      query {
+        characters {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
+  it "executes the query" do
+    characters = operation(:characters)
+
+    expect(characters).to include(
+      # ... 
+    )
+  end
+end
+```
+
+Note the lack of `response` use here. Internally, the `operation` method uses the `response` to obtain the data requested. This
+means the entire chain of operations from executing the GraphQL request, to converting the response into a hash, and digging
+through the results to find the correction operation, has been handled behind the scenes.
 
 ## Development
 
