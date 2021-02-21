@@ -1,5 +1,3 @@
-require "spec_helper"
-
 RSpec.describe RSpec::GraphQLResponse, "helper#operation", type: :graphql do
   context "graphql response with no data" do
     let(:query) { }
