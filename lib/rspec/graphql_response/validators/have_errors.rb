@@ -5,7 +5,7 @@ RSpec::GraphQLResponse.add_validator :have_errors do
   failure_message :length, ->(expected, actual) { "Expected response to have #{expected} errors, but found #{actual}" }
 
   failure_message_negated :nil, "Cannot evaluate nil for errors"
-  failure_message_negated :none, ->(_, actual) { "Expected response not to have errors, but found\n\t#{actual.inspect}" }
+  failure_message_negated :none, ->(actual) { "Expected response not to have errors, but found\n\t#{actual.inspect}" }
   failure_message_negated :unmatched, ->(expected, actual) { "Expected not to find\n\t#{expected.inspect}\nbut found\n\t#{actual.inspect}" }
   failure_message_negated :length, ->(expected, actual) { "Expected response not to have #{expected} errors, but found #{actual}" }
 
@@ -13,7 +13,7 @@ RSpec::GraphQLResponse.add_validator :have_errors do
     next fail_validation(:nil) if response.nil?
 
     errors = response.fetch("errors", [])
-    next fail_validation(:none, nil, errors) if errors.length == 0
+    next fail_validation(:none, errors) if errors.length == 0
 
     with_messages = !expected_messages.nil?
     with_count = !expected_count.nil?
