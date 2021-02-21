@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
+RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
   let(:expected_messages) { [] }
   let(:expected_count) { nil }
 
@@ -9,7 +9,7 @@ RSpec.describe RSpec::GraphQLResponse::Validators::HaveErrors do
   end
 
   let(:have_errors) do
-    validator = described_class.new(
+    validator = described_class.validator(:have_errors).new(
       response,
       expected_messages: expected_messages,
       expected_count: expected_count,

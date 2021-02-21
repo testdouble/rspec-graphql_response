@@ -18,16 +18,6 @@ module RSpec
     def self.reset_configuration
       @configuration = nil
     end
-
-    def execute_graphql
-      config = GraphQLResponse.configuration
-
-      config.graphql_schema.execute(query)
-    end
-
-    def response
-      execute_graphql.to_h
-    end
   end
 
   RSpec.configure do |config|

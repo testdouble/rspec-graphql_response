@@ -11,3 +11,5 @@ module RSpec
 end
 
 require_relative "helpers/operation"
+require_relative "helpers/response"
+require_relative "helpers/execute_graphql"
