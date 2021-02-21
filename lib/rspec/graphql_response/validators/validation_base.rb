@@ -1,5 +1,3 @@
-require_relative "validation_result"
-
 module RSpec
   module GraphQLResponse
     module Validators
@@ -14,21 +12,18 @@ module RSpec
             @negated_messages ||= {}
             @negated_messages[type] = msg
           end
+
+          def validate(&validation_method)
+            @validation_method = validation_method
+          end
         end
 
-        protected
+        def validate(response, *args)
+          validation_method = self.class.instance_variable_get(:@validation_method)
 
-        def fail_validation(type, *args)
-          message = failure_message(type)
-          negated_message = failure_message_negated(type)
-          ValidationResult.fail(message, negated_message, args)
+          runner = ValidationRunner.new(self)
+          runner.instance_exec(response, *args, &validation_method)
         end
-
-        def pass_validation
-          ValidationResult.pass
-        end
-
-        private
 
         def failure_message(type)
           self.class.instance_variable_get(:@messages)[type]

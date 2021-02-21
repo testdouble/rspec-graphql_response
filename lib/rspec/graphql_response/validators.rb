@@ -1,16 +1,18 @@
+require_relative "validators/validation_result"
 require_relative "validators/validation_base"
+require_relative "validators/validation_runner"
 
 module RSpec
   module GraphQLResponse
     def self.add_validator(name, &validator)
+      @validators ||= {}
+
       validator_class = Class.new(Validators::ValidationBase, &validator)
-      const_name = name.to_s.split('_').collect(&:capitalize).join
-      Validators.const_set(const_name, validator_class)
+      @validators[name] = validator_class
     end
 
     def self.validator(name)
-      const_name = name.to_s.split('_').collect(&:capitalize).join
-      Validators.const_get(const_name)
+      @validators[name].new
     end
   end
 end

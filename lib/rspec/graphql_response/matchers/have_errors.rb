@@ -1,12 +1,13 @@
 RSpec::GraphQLResponse.add_matcher :have_errors do |count = nil|
   match do |response|
-    have_errors = RSpec::GraphQLResponse.validator(:have_errors).new(
+    have_errors = RSpec::GraphQLResponse.validator(:have_errors)
+
+    @result = have_errors.validate(
       response,
       expected_count: count,
       expected_messages: @messages
     )
 
-    @result = have_errors.validate
     @result.valid?
   end
 

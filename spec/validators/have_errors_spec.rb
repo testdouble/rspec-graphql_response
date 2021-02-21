@@ -9,13 +9,13 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
   end
 
   let(:have_errors) do
-    validator = described_class.validator(:have_errors).new(
+    validator = described_class.validator(:have_errors)
+
+    validator.validate(
       response,
       expected_messages: expected_messages,
       expected_count: expected_count,
     )
-
-    validator.validate
   end
 
   let(:actual_messages) do
