@@ -1,15 +1,9 @@
-require "rspec/graphql_response/version"
-require "rspec/graphql_response/configuration"
-
-require "rspec/graphql_response/validators/validation_base"
-require "rspec/graphql_response/validators/validation_result"
-require "rspec/graphql_response/validators/have_errors"
-
-require "rspec/graphql_response/matchers/have_errors"
+require_relative "graphql_response/configuration"
+require_relative "graphql_response/validators"
+require_relative "graphql_response/matchers"
 
 module RSpec
   module GraphQLResponse
-    extend RSpec::Matchers::DSL
     include RSpec::GraphQLResponse::Matchers::HaveErrors
 
     def self.configure(&block)

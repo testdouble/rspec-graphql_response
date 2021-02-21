@@ -1,3 +1,5 @@
+require_relative "validation_result"
+
 module RSpec
   module GraphQLResponse
     module Validators

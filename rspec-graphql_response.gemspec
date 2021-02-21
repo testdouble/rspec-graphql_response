@@ -1,7 +1,10 @@
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path("../lib/rspec/", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "rspec/graphql_response/version"
+root = File.expand_path("../lib/rspec/graphql_response/", __FILE__)
+$LOAD_PATH.unshift(root) unless $LOAD_PATH.include?(root)
+
+require_relative "lib/rspec/graphql_response/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "rspec-graphql_response"
