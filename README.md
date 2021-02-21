@@ -83,7 +83,7 @@ let(:query) do
 end
 
 subject do
-  MySchema.execute(some_query)
+  MySchema.execute(query)
 end
 
 it "does something" do
