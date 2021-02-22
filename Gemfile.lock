@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rspec-graphql_response (0.1.0)
+      rspec
 
 GEM
   remote: https://rubygems.org/
@@ -41,7 +42,6 @@ DEPENDENCIES
   pry
   pry-byebug
   rake
-  rspec
   rspec-graphql_response!
 
 BUNDLED WITH

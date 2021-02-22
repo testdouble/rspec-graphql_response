@@ -1,3 +1,5 @@
+require "RSpec"
+
 require_relative "graphql_response/configuration"
 require_relative "graphql_response/validators"
 require_relative "graphql_response/matchers"

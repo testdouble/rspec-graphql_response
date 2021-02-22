@@ -28,7 +28,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "graphql", "~> 1.12"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-byebug"
+
+  spec.add_dependency "rspec"
 end
