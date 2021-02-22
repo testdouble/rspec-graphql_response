@@ -1,6 +1,4 @@
-RSpec.describe RSpec::GraphQLResponse, "matcher#have_errors" do
-  include described_class
-
+RSpec.describe RSpec::GraphQLResponse, "matcher#have_errors", type: :graphql do
   context "with errors" do
     let(:response) do 
       {
