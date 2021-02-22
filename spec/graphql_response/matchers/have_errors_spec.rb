@@ -19,6 +19,12 @@ RSpec.describe RSpec::GraphQLResponse, "matcher#have_errors", type: :graphql do
         expect(response).to have_errors(2)
       }.to raise_error("Expected response to have 2 errors, but found 1")
     end
+
+    it "invalidates when expecting not to have errors" do
+      expect { 
+        expect(response).to_not have_errors
+      }.to raise_error("Expected response not to have errors, but found\n\t[\"No query string was present\"]")
+    end
   end
 
   context "without errors" do

@@ -15,8 +15,20 @@ RSpec::GraphQLResponse.add_matcher :have_errors do |count = nil|
     @result.reason
   end
 
+  match_when_negated do |response|
+    have_errors = RSpec::GraphQLResponse.validator(:have_errors)
+
+    @result = have_errors.validate_negated(
+      response,
+      expected_count: count,
+      expected_messages: @messages
+    )
+
+    @result.valid?
+  end
+
   failure_message_when_negated do |response|
-    @result.negated_reason
+    @result.reason
   end
 
   chain :with_messages do |*messages|
