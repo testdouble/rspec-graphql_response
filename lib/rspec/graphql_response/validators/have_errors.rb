@@ -29,13 +29,13 @@ RSpec::GraphQLResponse.add_validator :have_errors do
     pass_validation 
   end
 
-  failure_message_negated :nil, "Cannot evaluate nil for errors"
-  failure_message_negated :none, ->(actual) { "Expected response not to have errors, but found\n\t#{actual.inspect}" }
-  failure_message_negated :unmatched, ->(expected, actual) { "Expected not to find any of\n\t#{expected.inspect}\nbut found\n\t#{actual.inspect}" }
-  failure_message_negated :length, ->(expected, actual, messages) { "Expected response not to have #{expected} errors, but found #{actual}\n\t#{messages.inspect}" }
+  failure_message :negated_nil, "Cannot evaluate nil for errors"
+  failure_message :negated_none, ->(actual) { "Expected response not to have errors, but found\n\t#{actual.inspect}" }
+  failure_message :negated_unmatched, ->(expected, actual) { "Expected not to find any of\n\t#{expected.inspect}\nbut found\n\t#{actual.inspect}" }
+  failure_message :negated_length, ->(expected, actual, messages) { "Expected response not to have #{expected} errors, but found #{actual}\n\t#{messages.inspect}" }
 
   validate_negated do |response, expected_messages: nil, expected_count: nil|
-    next fail_validation(:nil) if response.nil?
+    next fail_validation(:negated_nil) if response.nil?
 
     errors = response.fetch("errors", [])
     actual_messages = errors.map {|e| e["message"] }
@@ -45,12 +45,12 @@ RSpec::GraphQLResponse.add_validator :have_errors do
     with_count = !expected_count.nil?
 
     if !with_count && !with_messages && actual_count != 0
-      next fail_validation(:none, actual_messages)
+      next fail_validation(:negated_none, actual_messages)
     end
 
     if with_count
       if expected_count == actual_count
-        next fail_validation(:length, expected_count, actual_count, actual_messages)
+        next fail_validation(:negated_length, expected_count, actual_count, actual_messages)
       elsif !with_messages
         next pass_validation
       end
@@ -58,7 +58,7 @@ RSpec::GraphQLResponse.add_validator :have_errors do
 
     if with_messages
       unmatched_messages = expected_messages & actual_messages
-      next fail_validation(:unmatched, expected_messages, unmatched_messages) if unmatched_messages.any?
+      next fail_validation(:negated_unmatched, expected_messages, unmatched_messages) if unmatched_messages.any?
     end
 
     if with_messages || with_count

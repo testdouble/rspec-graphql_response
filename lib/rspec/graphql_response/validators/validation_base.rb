@@ -8,11 +8,6 @@ module RSpec
             @messages[type] = msg
           end
 
-          def failure_message_negated(type, msg)
-            @negated_messages ||= {}
-            @negated_messages[type] = msg
-          end
-
           def validate(&validate_method)
             @validate_method = validate_method
           end
@@ -38,10 +33,6 @@ module RSpec
 
         def failure_message(type)
           self.class.instance_variable_get(:@messages)[type]
-        end
-
-        def failure_message_negated(type)
-          self.class.instance_variable_get(:@negated_messages)[type]
         end
       end
     end
