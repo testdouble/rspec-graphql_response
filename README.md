@@ -19,6 +19,13 @@ Or install it yourself as:
 
     $ gem install rspec-graphql_response
 
+## Full Documentation
+
+The full documentation for RSpec::GraphQLResponse can be found in the `/docs`
+folder.
+
+* [have_errors matcher](/docs/have_errors.md)
+
 ## Usage
 
 There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
