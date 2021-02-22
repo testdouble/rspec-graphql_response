@@ -13,16 +13,27 @@ module RSpec
             @negated_messages[type] = msg
           end
 
-          def validate(&validation_method)
-            @validation_method = validation_method
+          def validate(&validate_method)
+            @validate_method = validate_method
+          end
+
+          def validate_negated(&validate_negated_method)
+            @validate_negated_method = validate_negated_method
           end
         end
 
         def validate(response, *args)
-          validation_method = self.class.instance_variable_get(:@validation_method)
+          validate_method = self.class.instance_variable_get(:@validate_method)
 
           runner = ValidationRunner.new(self)
-          runner.instance_exec(response, *args, &validation_method)
+          runner.instance_exec(response, *args, &validate_method)
+        end
+
+        def validate_negated(response, *args)
+          validate_negated_method = self.class.instance_variable_get(:@validate_negated_method)
+
+          runner = ValidationRunner.new(self)
+          runner.instance_exec(response, *args, &validate_negated_method)
         end
 
         def failure_message(type)

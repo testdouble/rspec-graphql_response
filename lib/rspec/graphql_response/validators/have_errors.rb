@@ -15,7 +15,7 @@ RSpec::GraphQLResponse.add_validator :have_errors do
     errors = response.fetch("errors", [])
     next fail_validation(:none, errors) if errors.length == 0
 
-    with_messages = !expected_messages.nil?
+    with_messages = Array(expected_messages).length > 0
     with_count = !expected_count.nil?
 
     if with_count
@@ -29,6 +29,30 @@ RSpec::GraphQLResponse.add_validator :have_errors do
 
       next fail_validation(:unmatched, expected_messages, actual_messages) if unmatched_messages.any?
     end
+
+    pass_validation 
+  end
+
+  validate_negated do |response, expected_messages: nil, expected_count: nil|
+    next fail_validation(:nil) if response.nil?
+
+    errors = response.fetch("errors", [])
+    with_messages = Array(expected_messages).length > 0
+    with_count = !expected_count.nil?
+
+    if with_count
+      actual_count = errors.length
+      next fail_validation(:length, expected_count, actual_count) if expected_count == actual_count
+    end
+
+    if with_messages
+      actual_messages = errors.map {|e| e["message"] }
+      unmatched_messages = expected_messages.difference(actual_messages)
+
+      next fail_validation(:unmatched, expected_messages, actual_messages) unless unmatched_messages.any?
+    end
+
+    next fail_validation(:none, errors) if errors.length != 0
 
     pass_validation 
   end
