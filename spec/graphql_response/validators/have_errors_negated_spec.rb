@@ -43,7 +43,7 @@ RSpec.describe RSpec::GraphQLResponse, "validator#not_have_errors" do
     end
 
     it "provides a reason" do
-      expect(not_have_errors.negated_reason).to eq("Expected response not to have errors, but found\n\t#{actual_messages.inspect}")
+      expect(not_have_errors.negated_reason).to eq("Expected response not to have errors, but found\n\t#{response["errors"].inspect}")
     end
   end
 
