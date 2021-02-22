@@ -26,26 +26,7 @@ folder.
 
 * [have_errors matcher](/docs/have_errors.md)
 
-## Usage
-
-There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
-a GraphQL Schema `.execute`. These include:
-
-Spec types:
-
-* `:graphql`
-
-Helper methods:
-
-* `execute_graphql`
-* `response`
-* `operation`
-
-Matchers:
-
-* `have_errors`
-
-### Configuration
+## Configuration
 
 To get things rolling, add a configuration block to your `spec_helper.rb` (or other file that gets included in specs, as
 desired). Within this block, you'll need to provide the GraphQL Schema to use for query execution.
@@ -58,6 +39,25 @@ RSpec::GraphQLResponse.configure |config| do
 
 end
 ```
+
+## Getting Started
+
+There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
+a GraphQL Schema `.execute`. These include:
+
+Spec types:
+
+* `type: :graphql`
+
+Helper methods:
+
+* `execute_graphql`
+* `response`
+* `operation`
+
+Matchers:
+
+* `have_errors`
 
 ### The `:graphql` Spec Type
 
