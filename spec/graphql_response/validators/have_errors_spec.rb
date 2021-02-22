@@ -40,10 +40,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
     it "provides a reason" do
       expect(have_errors.reason).to eq("Cannot evaluate nil for errors")
     end
-
-    it "provides a negated reason" do
-      expect(have_errors.negated_reason).to eq("Cannot evaluate nil for errors")
-    end
   end
 
   context "no errors" do
@@ -55,10 +51,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
 
     it "provides a reason" do
       expect(have_errors.reason).to eq("Expected response to have errors, but found none")
-    end
-
-    it "provides a negated reason" do
-      expect(have_errors.negated_reason).to eq("Expected response not to have errors, but found\n\t#{actual_messages.inspect}")
     end
   end
 
@@ -80,10 +72,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
     it "provides a reason" do
       expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
-
-    it "provides a negated reason" do
-      expect(have_errors.negated_reason).to eq("Expected not to find\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
-    end
   end
 
   context "incorrect message expected" do
@@ -95,10 +83,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
 
     it "provides a reason" do
       expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
-    end
-
-    it "provides a negated reason" do
-      expect(have_errors.negated_reason).to eq("Expected not to find\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
   end
 
@@ -120,10 +104,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
     it "provides a reason" do
       expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found #{actual_count}")
     end
-
-    it "provides a negated reason" do
-      expect(have_errors.negated_reason).to eq("Expected response not to have #{expected_count} errors, but found #{actual_count}")
-    end
   end
 
   context "with unmatched error count and unmatched messages" do
@@ -137,10 +117,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
     it "provides the unmatched error count reason" do
       expect(have_errors.reason).to eq("Expected response to have #{expected_count} errors, but found #{actual_count}")
     end
-
-    it "provides the negated unmatched error count reason" do
-      expect(have_errors.negated_reason).to eq("Expected response not to have #{expected_count} errors, but found #{actual_count}")
-    end
   end
 
   context "with matched error count and unmatched messages" do
@@ -153,10 +129,6 @@ RSpec.describe RSpec::GraphQLResponse, "validator#have_errors" do
 
     it "provides the unmatched error count reason" do
       expect(have_errors.reason).to eq("Expected\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
-    end
-
-    it "provides the negated unmatched error count reason" do
-      expect(have_errors.negated_reason).to eq("Expected not to find\n\t#{expected_messages.inspect}\nbut found\n\t#{actual_messages.inspect}")
     end
   end
 end
