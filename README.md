@@ -24,7 +24,13 @@ Or install it yourself as:
 The full documentation for RSpec::GraphQLResponse can be found in the `/docs`
 folder.
 
+Custom Matchers:
 * [have_errors matcher](/docs/have_errors.md)
+
+Internal API / Development
+
+* [.add_matcher](/docs/add_matcher.md)
+* [.add_validator](/docs/add_validator.md)
 
 ## Configuration
 
