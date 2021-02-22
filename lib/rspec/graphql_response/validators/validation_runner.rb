@@ -12,8 +12,7 @@ module RSpec
 
         def fail_validation(type, *args)
           message = validator.failure_message(type)
-          negated_message = validator.failure_message_negated(type)
-          ValidationResult.fail(message, negated_message, args)
+          ValidationResult.fail(message, args)
         end
 
         def pass_validation
