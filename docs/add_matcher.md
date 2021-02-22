@@ -21,6 +21,9 @@ RSpec::GraphQLResponse.add_matcher do |some_option|
 end
 ```
 
+This call is only a wrapper around RSpec's `matcher`. For information on how to
+build your matcher, see the [RSpec project documentation](https://relishapp.com/rspec/rspec-expectations/v/3-10/docs/custom-matchers/define-a-custom-matcher).
+
 ## Combined with a Custom Validator
 
 RSpec::GraphQLResponse provides a means of keeping your matcher code clean while
