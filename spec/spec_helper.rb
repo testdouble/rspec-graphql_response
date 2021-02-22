@@ -1,8 +1,8 @@
 require "pry-byebug"
-require "graphql_response"
 
 require "graphql"
 require "graphql/example_schema"
+require "rspec/graphql_response"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
