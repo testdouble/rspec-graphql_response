@@ -9,3 +9,6 @@
 
 # rspec failure tracking
 .rspec_status
+
+# ignore the resulting .gem file from gem build
+rspec-graphql_response*.gem
