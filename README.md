@@ -25,18 +25,24 @@ The full documentation for RSpec::GraphQLResponse can be found in the `/docs`
 folder.
 
 Custom Matchers:
-* [have_errors matcher](/docs/have_errors.md)
+* [have_errors matcher](/docs/have_errors.md) - validates errors, or lack of, on
+  the GraphQL response
+
+Helper Methods:
+* [operation](/docs/operation.md) - retrieves the results of a named operation
+  from the GraphQL response
 
 Internal API / Development
 
-* [.add_matcher](/docs/add_matcher.md)
-* [.add_validator](/docs/add_validator.md)
+* [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the
+  GraphQLResponse matchers
+* [.add_validator](/docs/add_validator.md) - add a custom validator to be used
+  by the custom matchers
 
 ## Configuration
 
 To get things rolling, add a configuration block to your `spec_helper.rb` (or other file that gets included in specs, as
 desired). Within this block, you'll need to provide the GraphQL Schema to use for query execution.
-
 
 ```ruby
 RSpec::GraphQLResponse.configure |config| do
