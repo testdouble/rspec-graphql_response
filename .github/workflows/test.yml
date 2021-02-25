@@ -14,4 +14,4 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler_cache: true
-      - run: bundle exec rake
+      - run: bin/rspec
