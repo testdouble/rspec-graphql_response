@@ -6,6 +6,7 @@ on:
     - README.md
     - CODE_OF_CONDUCT.md
     - LICENSE.txt
+    - 'docs/**'
 jobs:
   test:
     runs-on: ubuntu-latest
