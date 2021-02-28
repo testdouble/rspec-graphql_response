@@ -29,6 +29,8 @@ Custom Matchers:
   the GraphQL response
 
 Helper Methods:
+* [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
+* [response](/docs/response.md) - the response, as JSON, of the executed graphql query
 * [operation](/docs/operation.md) - retrieves the results of a named operation
   from the GraphQL response
 
