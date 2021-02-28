@@ -1,11 +1,11 @@
 RSpec.describe RSpec::GraphQLResponse, "#add_validator" do
   before :all do
     RSpec::GraphQLResponse.add_validator :test_validator do
+      # validation messages and method
+      # ------------------------------
+
       failure_message :example, "example failure message"
       failure_message :does_not_pass, "does not pass"
-
-      failure_message :negated_example, "example negated failure message"
-      failure_message :negated_does_not_pass, "negated does not pass"
 
       validate do |actual, fail_example: false|
         next fail_validation(:example) if fail_example
@@ -16,6 +16,12 @@ RSpec.describe RSpec::GraphQLResponse, "#add_validator" do
 
         pass_validation
       end
+
+      # negated validation messages and method
+      # --------------------------------------
+
+      failure_message :negated_example, "example negated failure message"
+      failure_message :negated_does_not_pass, "negated does not pass"
 
       validate_negated do |actual, fail_negated_example: false|
         next fail_validation(:negated_example) if fail_negated_example
