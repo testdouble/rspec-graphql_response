@@ -1,0 +1,2 @@
+# RSpec::GraphQLResponse Configuration
+

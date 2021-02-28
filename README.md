@@ -24,6 +24,10 @@ Or install it yourself as:
 The full documentation for RSpec::GraphQLResponse can be found in the `/docs`
 folder.
 
+Configuration:
+* [RSpec::GraphQLResponse.configure](/docs/configuration.md)
+* [Spec Type :graphql](/docs/graphql_spec_type.md)
+
 Custom Matchers:
 * [have_errors matcher](/docs/have_errors.md) - validates errors, or lack of, on
   the GraphQL response
@@ -34,8 +38,7 @@ Helper Methods:
 * [operation](/docs/operation.md) - retrieves the results of a named operation
   from the GraphQL response
 
-Internal API / Development
-
+API / Development
 * [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the
   GraphQLResponse matchers
 * [.add_validator](/docs/add_validator.md) - add a custom validator to be used
