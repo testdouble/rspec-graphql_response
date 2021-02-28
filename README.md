@@ -3,6 +3,15 @@
 RSpec::GraphQLResponse provides a series of RSpec matchers, helper methods, and other configuration to help simplify
 the testing of responses from the `graphql-ruby` gem and the `<GraphQLSchemaName>.execute` method.
 
+## "Why Should I Use This?"
+
+There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
+a GraphQL Schema `.execute`. Additionally, there are custom matchers and other bits that will help simplify your work in
+validating common peices of a graphql response.
+
+Lastly, the work in this gem is geared toward customization for your own application's needs. Every API call used for building
+the pieces of this gem are available to you, directly, in the `API / Development` documentation, below.
+
 ## Installation
 
 Your app must have `graphql-ruby` and `rspec`. With that done, add this line to your application's Gemfile:
@@ -21,76 +30,46 @@ Or install it yourself as:
 
 ## Full Documentation
 
-The full documentation for RSpec::GraphQLResponse can be found in the `/docs`
-folder.
+The full documentation for RSpec::GraphQLResponse can be found in the `/docs` folder.
 
 Configuration:
 * [RSpec::GraphQLResponse.configure](/docs/configuration.md)
 * [Spec Type :graphql](/docs/graphql_spec_type.md)
 
 Custom Matchers:
-* [have_errors matcher](/docs/have_errors.md) - validates errors, or lack of, on
-  the GraphQL response
+* [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
+* [have_operation]() - **COMING SOON** - validates the presence of a specified graphql operation in the graphql response
 
 Helper Methods:
 * [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
 * [response](/docs/response.md) - the response, as JSON, of the executed graphql query
-* [operation](/docs/operation.md) - retrieves the results of a named operation
-  from the GraphQL response
+* [operation](/docs/operation.md) - retrieves the results of a named operation from the GraphQL response
 
 API / Development
-* [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the
-  GraphQLResponse matchers
-* [.add_validator](/docs/add_validator.md) - add a custom validator to be used
-  by the custom matchers
-
-## Configuration
-
-To get things rolling, add a configuration block to your `spec_helper.rb` (or other file that gets included in specs, as
-desired). Within this block, you'll need to provide the GraphQL Schema to use for query execution.
-
-```ruby
-RSpec::GraphQLResponse.configure |config| do
-
-  config.graphql_schema = MyGraphQLSchema
-
-end
-```
+* [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the GraphQLResponse matchers
+* [.add_validator](/docs/add_validator.md) - add a custom validator to be used by the custom matchers
 
 ## Getting Started
 
-There are a number of built-in helper methods and matchers that will allow you to skip the copy & paste work of executing
-a GraphQL Schema `.execute`. These include:
+There are only a couple of bits you need to get started: 
 
-Spec types:
-
-* `type: :graphql`
-
-Helper methods:
-
-* `execute_graphql`
-* `response`
-* `operation`
-
-Matchers:
-
-* `have_errors`
-
-### The `:graphql` Spec Type
-
-To use these custom helpers and matchers, you need to specificy `type: :graphql` as part of your spec's description. For exmaple,
+* configuration of a GraphQL Schema in [`RSpec::GraphQLResponse.configure`](/docs/configuration.md)
+* the inclusion of [`type: :graphql`](/docs/graphql_spec_type.md) in your `RSpec.describe` call
 
 ```ruby
-RSpec.describe Some::Thing, type: :graphql do
+RSpec::GraphQLResponse.configure do |config|
+  config.graphql_schema = MyGraphQLSchema
+end
 
-  # ... 
-
+RSpec.describe My::Cool::Thing, type: :graphql do
+  # ...
 end
 ```
 
-With this `type` set, your specs will have access to all of the `RSpec::GraphQLResponse` code.
+Beyond these two basic needs, understanding the reason for this gem's existence can be useful in figuring out what the gem
+does, and what methods and options are available.
 
-### Helper Methods
+## How We Got Here
 
 Executing a GraphQL call from RSpec is not the most challening code to write:
 
