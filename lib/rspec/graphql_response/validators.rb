@@ -11,6 +11,11 @@ module RSpec
       @validators[name] = validator_class
     end
 
+    def self.remove_validator(name)
+      @validators ||= {}
+      @validators.delete(:key)
+    end
+
     def self.validator(name)
       @validators[name].new
     end
