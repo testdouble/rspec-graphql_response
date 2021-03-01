@@ -53,6 +53,7 @@ Spec Helper Methods:
 API / Development
 * [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the GraphQLResponse matchers
 * [.add_validator](/docs/add_validator.md) - add a custom validator to be used by the custom matchers
+* [.add_helper](/docs/add_helper.md) - add helper methods to your specs, made avialable in `it` or `describe` / `context` blocks
 
 ## Getting Started
 
