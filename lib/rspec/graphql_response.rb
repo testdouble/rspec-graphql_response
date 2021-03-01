@@ -1,4 +1,4 @@
-require "RSpec"
+require "rspec"
 
 require_relative "graphql_response/version"
 require_relative "graphql_response/configuration"
