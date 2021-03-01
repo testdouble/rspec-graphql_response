@@ -1,14 +1,12 @@
 RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
-  let(:query) do
-    <<-GQL
-        query {
-          characters {
-            id,
-            name
-          }
-        }
-    GQL
-  end
+  graphql_query <<-GQL
+    query {
+      characters {
+        id,
+        name
+      }
+    }
+  GQL
 
   it "uses execute_graphql to create a response" do
     expect(self).to receive(:execute_graphql).once.and_call_original
