@@ -1,5 +1,9 @@
 module RSpec
   module GraphQLResponse
+    def self.add_context_helper(name, &helper)
+      self.add_helper(name, scope: :context, &helper)
+    end
+
     def self.add_helper(name, scope: :spec, &helper)
       helper_module = Module.new do |mod|
         mod.define_method(name) do |*args|
@@ -21,7 +25,7 @@ module RSpec
 
         module_method = if scope == :spec
                           :include
-                        elsif scope == :describe
+                        elsif scope == :context
                           :extend
                         else
                           raise ArgumentError, "A helper method's scope must be either :spec or :describe"

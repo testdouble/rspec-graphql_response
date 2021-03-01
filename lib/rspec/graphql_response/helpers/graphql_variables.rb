@@ -1,3 +1,3 @@
-RSpec::GraphQLResponse.add_helper :graphql_variables, scope: :describe do |vars|
+RSpec::GraphQLResponse.add_context_helper :graphql_variables do |vars|
   @graphql_variables = vars
 end
