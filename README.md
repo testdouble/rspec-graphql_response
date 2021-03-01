@@ -110,16 +110,14 @@ in your specs.
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  let(:query) do
-    <<-GQL
-      query ListCharacters{
-        characters {
-          id
-          name
-        }
+  graphql_query <<-GQL
+    query ListCharacters{
+      characters {
+        id
+        name
       }
-    GQL
-  end
+    }
+  GQL
 
   it "executes the query" do
     response = execute_graphql.to_h
@@ -136,16 +134,14 @@ way. The reduce this, `RSpec::GraphQLResponse` provides a built-in `response` he
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  let(:query) do
-    <<-GQL
-      query {
-        characters {
-          id
-          name
-        }
+  graphql_query <<-GQL
+    query ListCharacters{
+      characters {
+        id
+        name
       }
-    GQL
-  end
+    }
+  GQL
 
   it "executes the query" do
     expect(response).to include(
@@ -165,16 +161,14 @@ nested hash checking, use the built-in `operation` method to retrieve the `chara
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  let(:query) do
-    <<-GQL
-      query {
-        characters {
-          id
-          name
-        }
+  graphql_query <<-GQL
+    query ListCharacters{
+      characters {
+        id
+        name
       }
-    GQL
-  end
+    }
+  GQL
 
   it "executes the query" do
     characters = operation(:characters)
