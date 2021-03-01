@@ -40,8 +40,13 @@ Custom Matchers:
 * [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
 * [have_operation]() - **COMING SOON** - validates the presence of a specified graphql operation in the graphql response
 
-Helper Methods:
+Context / Describe Helper Methods:
 * [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
+* [graphql_query](/docs/execute_graphql.md) - the query to execute
+* [graphql_variables](/docs/execute_graphql.md) - a hash of variables the query expects
+* [graphql_context](/docs/execute_graphql.md) - the `context` of a query or mutation's resolver
+
+Spec Helper Methods:
 * [response](/docs/response.md) - the response, as JSON, of the executed graphql query
 * [operation](/docs/operation.md) - retrieves the results of a named operation from the GraphQL response
 
