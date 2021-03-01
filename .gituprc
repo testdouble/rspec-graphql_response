@@ -1,0 +1,128 @@
+# Gitup: Git Update Dance Configuration
+# -------------------------------------
+# configuration for gitup can be set as a default for the current user
+# by adding a ~/.gituprc file with settings
+# 
+# current project or local directory settings can be added in ./.gituprc
+# 
+# the .gituprc file is a valid shell script, loaded every time gitup is
+# run. this means you can add logic, functions, and other calls to the
+# .gituprc file and it will be executed at runtime
+
+
+# GIT CONFIGURATION
+# -----------------
+# Manages the git branch update process for your project
+#
+# GITUP_SKIP_UPDATE:
+#   Whether or not a git update is performed prior to running
+#   the bundle install or db:migrate steps
+#
+#   Options:
+#     0: (default) do not skip the update
+#     1: skip the update
+#
+# GITUP_MERGE_COMMAND:
+#   How to update the local git branch, from the upstream branch.
+#
+#   Options:
+#     rebase:  (default) force a rebase of the upstream branch
+#     merge:   force a merge of the upstream branch
+#     <other>: your own command: `git <other> <remote>/<branch>`
+#
+# GITUP_REMOTE_NAME:
+#   The git remote name to pull from
+#
+#   Default:
+#     origin
+#
+# GITUP_BRANCH_NAME:
+#   The main remote branch name to pull, from which your current
+#   branch will be updated
+#
+#   Default:
+#     development
+#
+# GITUP_GIT_UPDATE_FN:
+#   The method called to update your git branch. Responsible
+#   for handling git pull, git merge or rebase, etc.
+#
+#   Params:
+#     $1: Merge Command
+#     $2: Remote Name
+#     $3: Branch Name 
+#
+#   Default:
+#     GITUP_GIT_UPDATE_FN=__gitup_git_update
+#
+GITUP_SKIP_UPDATE=0
+# GITUP_MERGE_COMMAND=rebase
+GITUP_REMOTE_NAME=origin
+GITUP_BRANCH_NAME=main
+GITUP_GIT_UPDATE_FN=__gitup_git_update
+
+# ADVANCED GIT CONFIGURATION
+# --------------------------
+# This .gituprs file is a full bash script. You can add logic
+# to determine how to update, based on your current branch, etc.
+#
+# Examples:
+#
+#   How to change merge command for specific branches
+#   
+# current git branch
+local branch_name=$(git symbolic-ref -q HEAD)
+
+# remove the `refs/heads/` structure from the name
+branch_name=${branch_name##refs/heads/}
+
+# merge if we're in 'development' branch
+if [[ $branch_name == $GITUP_BRANCH_NAME ]]; then
+  GITUP_MERGE_COMMAND=merge
+else
+  GITUP_MERGE_COMMAND=rebase
+fi
+
+# DEPENDENCY INSTALLATION
+# -----------------------
+# Manage the step installs dependencies, after updating git.
+# For example, run `bundle install` (default) and/or other 
+# commands to keep your project's dependencies up to date.
+#
+# GITUP_SKIP_INSTALL_DEPENDENCIES:
+#   Whether or not to skip the step that runs immediately after 
+#   the git-update completes
+#
+#   Options:
+#     0: (default) do not skip the after_update step
+#     1: skip the after_update step
+#
+# GITUP_INSTALL_DEPENDENCIES_FN:
+#   Function to run after gitup has completed the git update process
+#
+#   Default:
+#     GITUP_INSTALL_DEPENDENCIES_FN=__gitup_install_dependencies
+#
+GITUP_SKIP_INSTALL_DEPENDENCIES=0
+GITUP_INSTALL_DEPENDENCIES_FN=__gitup_install_dependencies
+
+# RUN MIGRATIONS
+# --------------
+# Manage the process of running schema and/or data migrations,
+# after your project's post-git-update function has run
+#
+# GITUP_SKIP_MIGRATIONS:
+#   Whether or not to skip the db:migration steps after the git update
+#
+#   Options:
+#     0: (default) do not skip the db:migration steps
+#     1: skip the db:migration steps
+#
+# GITUP_RUN_MIGRATIONS_FN:
+#   Function to run migrations. Occurs after git update and post-update steps
+#
+#   Default:
+#     GITUP_RUN_MIGRATIONS_FN=__gitup_migrations
+#
+GITUP_SKIP_MIGRATIONS=1
+# GITUP_RUN_MIGRATIONS_FN=__gitup_migrations
