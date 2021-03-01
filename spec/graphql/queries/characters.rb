@@ -20,6 +20,11 @@ module Queries
         }
       ]
 
+      current_user = context[:current_user]
+      if current_user
+        data << {"id" => "4", "name" => current_user }
+      end
+
       if name
         data.select { |c| c["name"] == name }
       else
