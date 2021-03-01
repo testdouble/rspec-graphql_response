@@ -11,7 +11,7 @@ RSpec::GraphQLResponse.add_matcher :have_errors do |count = nil|
     @result.valid?
   end
 
-  failure_message do |response|
+  failure_message do |_|
     @result.reason
   end
 
@@ -27,7 +27,7 @@ RSpec::GraphQLResponse.add_matcher :have_errors do |count = nil|
     @result.valid?
   end
 
-  failure_message_when_negated do |response|
+  failure_message_when_negated do |_|
     @result.reason
   end
 
