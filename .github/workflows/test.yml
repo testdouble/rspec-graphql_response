@@ -1,18 +1,11 @@
 name: Test rspec-graphql_response
-on:
-  pull_request:
-  push:
-  paths-ignore:
-    - README.md
-    - CODE_OF_CONDUCT.md
-    - LICENSE.txt
-    - 'docs/**'
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler_cache: true
-      - run: bin/rspec
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - run: bin/rspec
