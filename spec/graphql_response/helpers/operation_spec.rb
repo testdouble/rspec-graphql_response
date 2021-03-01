@@ -1,7 +1,5 @@
 RSpec.describe RSpec::GraphQLResponse, "helper#operation", type: :graphql do
   context "graphql response with no data" do
-    let(:query) { }
-
     it "returns nil" do
       characters = operation(:characters)
 
@@ -10,16 +8,14 @@ RSpec.describe RSpec::GraphQLResponse, "helper#operation", type: :graphql do
   end
 
   context "graphql response with data" do
-    let(:query) do
-      <<-GQL
-        query {
-          characters {
-            id,
-            name
-          }
+    graphql_query <<-GQL
+      query {
+        characters {
+          id,
+          name
         }
-      GQL
-    end
+      }
+    GQL
 
     it "retrieves the named operation from the graphql response" do
       characters = operation(:characters)

@@ -1,17 +1,16 @@
-RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
+RSpec.describe RSpec::GraphQLResponse, "graphql_query helper", type: :graphql do
   graphql_query <<-GQL
-    query {
+    query CharacterList {
       characters {
-        id,
+        id
         name
       }
     }
   GQL
 
-  it "uses execute_graphql to create a response" do
-    expect(self).to receive(:execute_graphql).once.and_call_original
+  it "executes the supplied graphql query" do
+    expect(response).to_not have_errors
 
-    expect(response).to_not be_nil
     expect(response["data"]).to include(
       "characters" => [
         { "id" => "1", "name" => "Jam" },
