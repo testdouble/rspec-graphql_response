@@ -5,8 +5,19 @@ RSpec::GraphQLResponse.add_validator :have_operation do
   validate do |response, operation_name:|
     next fail_validation(:nil) unless response.is_a? Hash
 
-    op = response.dig("data", operation_name)
+    op = response.dig("data", operation_name.to_s)
     next fail_validation(:not_found, operation_name, response) if op.nil?
+
+    pass_validation
+  end
+
+  failure_message :found, ->(expected, actual) { "Expected not to find operation result named #{expected}, but found it\n\t#{actual}" }
+
+  validate_negated do |response, operation_name:|
+    next fail_validation(:nil) unless response.is_a? Hash
+
+    op = response.dig("data", operation_name.to_s)
+    next fail_validation(:found, operation_name, response) unless op.nil?
 
     pass_validation
   end
