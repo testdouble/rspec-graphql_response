@@ -38,7 +38,7 @@ Configuration:
 
 Custom Matchers:
 * [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
-* [have_operation]() - **COMING SOON** - validates the presence of a specified graphql operation in the graphql response
+* [have_operation](/docs/have_operation.md) - validates the presence of a specified graphql operation in the graphql response
 
 Context / Describe Helper Methods:
 * [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
