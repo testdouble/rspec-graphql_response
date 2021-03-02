@@ -30,6 +30,9 @@ Or install it yourself as:
 
 ## Full Documentation
 
+* [Release Notes](/RELEASE_NOTES.md)
+* [Upgrade Guide](/UPGRADE.md)
+
 The full documentation for RSpec::GraphQLResponse can be found in the `/docs` folder.
 
 Configuration:
