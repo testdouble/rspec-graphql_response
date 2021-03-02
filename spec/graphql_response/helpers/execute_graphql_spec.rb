@@ -8,9 +8,8 @@ RSpec.describe RSpec::GraphQLResponse, "helper#execute_graphql", type: :graphql 
     }
   GQL
 
-  it "can execute graphql using a let(:query)" do
-    response = execute_graphql.to_h
-    expect(response).to_not be_nil
+  it "can execute graphql" do
+    expect(response).to_not have_errors
 
     expect(response["data"]).to include(
       "characters" => [
