@@ -8,16 +8,11 @@ RSpec.describe RSpec::GraphQLResponse, "#have_operation validator", type: :graph
     }
   GQL
 
-  let(:operation_name) { :operation_does_not_exist }
+  let(:operation_name) { nil }
 
   subject(:result) do
     validator = RSpec::GraphQLResponse.validator :have_operation
     validator.validate_negated(response, operation_name: operation_name)
-  end
-
-  it "validates the operation result is not present" do
-    expect(response).not_to have_errors
-    expect(result.valid?).to be_truthy
   end
 
   context "nil response" do
@@ -29,6 +24,15 @@ RSpec.describe RSpec::GraphQLResponse, "#have_operation validator", type: :graph
 
     it "provides a reason" do
       expect(result.reason).to eq("Cannot evaluate operations on nil")
+    end
+  end
+
+  context "operation not present" do
+    let(:operation_name) { :operation_does_not_exist }
+
+    it "validates the operation result is not present" do
+      expect(response).not_to have_errors
+      expect(result.valid?).to be_truthy
     end
   end
 
