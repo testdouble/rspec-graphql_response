@@ -26,10 +26,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.17"
-  spec.add_development_dependency "graphql", "~> 1.12"
   spec.add_development_dependency "rake", ">= 12.0"
   spec.add_development_dependency "pry", "~> 0.14"
   spec.add_development_dependency "pry-byebug", "~> 3.8"
 
   spec.add_runtime_dependency "rspec", ">= 3.0"
+  spec.add_runtime_dependency "graphql", ">= 1.0"
 end
