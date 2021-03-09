@@ -6,13 +6,14 @@ module RSpec
 
     def self.add_helper(name, scope: :spec, &helper)
       helper_module = Module.new do |mod|
-        mod.define_method(name) do |*args|
+        mod.define_method(name) do |*args, &block|
           instance_var = "@#{name}".to_sym
 
           if self.instance_variables.include? instance_var
             return self.instance_variable_get(instance_var)
           end
 
+          args << block
           result = self.instance_exec(*args, &helper)
           self.instance_variable_set(instance_var, result)
         end
@@ -20,7 +21,8 @@ module RSpec
 
       RSpec.configure do |config|
         config.after(:each) do
-          helper_module.instance_variable_set(:@result, nil)
+          instance_var = "@#{name}".to_sym
+          helper_module.instance_variable_set(instance_var, nil)
         end
 
         module_method = if scope == :spec
