@@ -2,9 +2,10 @@ RSpec::GraphQLResponse.add_helper :execute_graphql do
   config = RSpec::GraphQLResponse.configuration
 
   query = graphql_query if respond_to? :graphql_query
-  query = self.instance_eval(&graphql_query) if graphql_query.is_a? Proc
+  query = self.instance_eval(&graphql_query) if query.is_a? Proc
 
   query_vars = graphql_variables if respond_to? :graphql_variables
+  query_vars = self.instance_eval(&graphql_variables) if query_vars.is_a? Proc
   
   query_context = graphql_context if respond_to? :graphql_context
   query_context = self.instance_eval(&query_context) if query_context.is_a? Proc

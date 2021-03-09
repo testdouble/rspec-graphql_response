@@ -21,4 +21,24 @@ RSpec.describe RSpec::GraphQLResponse, "graphql_variables helper", type: :graphq
       ]
     )
   end
+
+  context "proc as value" do
+    let(:sample_value) { "Pet" }
+
+    graphql_variables do
+      {
+        name: sample_value
+      }
+    end
+
+    it "provides access to let vars through a proc as value" do
+      expect(response).to_not have_errors
+
+      expect(response["data"]).to include(
+        "characters" => [
+          { "id" => "3", "name" => "Pet" }
+        ]
+      )
+    end
+  end
 end
