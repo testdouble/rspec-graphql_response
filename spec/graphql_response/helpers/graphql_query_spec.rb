@@ -33,4 +33,28 @@ RSpec.describe RSpec::GraphQLResponse, "graphql_query helper", type: :graphql do
       )
     end
   end
+
+  context "proc as value" do
+    graphql_query do
+      <<-GQL
+        query CharacterList {
+          characters {
+            name
+          }
+        }
+      GQL
+    end
+
+    it "provides access to let vars through a proc as value" do
+      expect(response).to_not have_errors
+
+      expect(response["data"]).to include(
+        "characters" => [
+          { "name" => "Jam" },
+          { "name" => "Redemption" },
+          { "name" => "Pet" }
+        ]
+      )
+    end
+  end
 end
