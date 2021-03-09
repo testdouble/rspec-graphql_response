@@ -19,4 +19,13 @@ RSpec.describe RSpec::GraphQLResponse, "#add_helper", type: :graphql do
       expect(@p1).to eq("bar")
     end
   end
+
+  context "proc as value" do
+    it "provides the proc" do
+      example_helper { "proc foo" }
+
+      expect(@p1).to be_a Proc
+      expect(@p1.call).to eq("proc foo")
+    end
+  end
 end
