@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    rspec-graphql_response (0.2.0)
-      rspec (~> 3.10)
+    rspec-graphql_response (0.2.1)
+      graphql (>= 1.0)
+      rspec (>= 3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -38,7 +39,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
-  graphql (~> 1.12)
   pry (~> 0.14)
   pry-byebug (~> 3.8)
   rake (>= 12.0)
