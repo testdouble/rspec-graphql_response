@@ -5,6 +5,9 @@ methods for configuring the query.
 
 ```ruby
 RSPec.describe Cool::Stuff, type: :graphql do
+  let(:user) { create(:graphql_user) }
+  let(:search_name) { "Pet" }
+
   graphql_query <<-GQL
     query SomeThing($name: String) {
       characters(name: $name) {
@@ -14,13 +17,17 @@ RSPec.describe Cool::Stuff, type: :graphql do
     }
   GQL
   
-  graphql_variables {
-    name: "Jam"
-  }
+  graphql_variables do
+    {
+      name: search_name
+    }
+  end
 
-  grapql_context {
-    current_user: "some user or whatever you need"
-  }
+  grapql_context do
+    {
+      current_user: user
+    }
+  end
 
   it "executes and does the thing with the vars and context" do
     # ... expect things here
