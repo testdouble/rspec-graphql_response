@@ -1,8 +1,6 @@
 RSpec.describe RSpec::GraphQLResponse, "#add_helper", type: :graphql do
-  before(:all) do
-    RSpec::GraphQLResponse.add_helper :example_helper do |p1|
-      @p1 = p1
-    end
+  RSpec::GraphQLResponse.add_helper :example_helper do |p1|
+    @p1 = p1
   end
 
   it "makes the helper method callable" do
