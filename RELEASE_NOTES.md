@@ -8,7 +8,7 @@ See [the upgrade guide](/UPGRADE.md) for details on changes between versions and
 
 ### Breaking Changes
 
-The helper `graphql_query` was renamed to `graphql_operation` to better communicate the use of the helper. Naming the helper with `_query` lead to an association that its use was meant for GraphQL querry opterations and could not also be used for a mutation.
+The helper `graphql_query` was renamed to `graphql_operation` to better communicate the use of the helper. Naming the helper with `_query` lead to an association that its use was meant for GraphQL query operations and could not also be used for a mutation.
 
 ## v0.2.0 - GraphQL Configuration DSL and Refactorings
 
