@@ -1,5 +1,5 @@
 require "pry-byebug"
-
+require "super_diff/rspec"
 require "graphql"
 require "graphql/example_schema"
 require "rspec/graphql_response"

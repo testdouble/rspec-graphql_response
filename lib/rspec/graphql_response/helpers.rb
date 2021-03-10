@@ -42,7 +42,6 @@ end
 # describe level helpers
 require_relative "helpers/graphql_context"
 require_relative "helpers/graphql_operation"
-require_relative "helpers/graphql_query"
 require_relative "helpers/graphql_variables"
 
 # spec level helpers

@@ -3,21 +3,30 @@ module Queries
     type [Types::Response::Character], null: false
 
     argument :name, String, required: false
-    argument :friend, [Types::Response::Character], null: false, required: false
 
     def resolve(name: nil)
       data = [
         {
           "id" => "1",
-          "name" => "Jam"
+          "name" => "Jam",
+          "friends" => [
+            { "name" => "Redemption" }
+          ]
         },
         {
           "id" => "2",
-          "name" => "Redemption"
+          "name" => "Redemption",
+          "friends" => [
+            { "name" => "Pet" },
+            { "name" => "Jam" }
+          ]
         },
         {
           "id" => "3",
-          "name" => "Pet"
+          "name" => "Pet",
+          "friends" => [
+            { "name" => "Redemption" }
+          ]
         }
       ]
 
