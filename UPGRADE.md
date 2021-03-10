@@ -1,5 +1,9 @@
 # Upgrade Guide
 
+## v0.3.0 to v0.4.0
+
+There is a breaking change between v0.3.0 and v0.4.0 where the helper `graphql_query` was renamed to `graphql_operation`. In order to migrate to v0.4.0 all references to `graphql_query` can be replaced with `graphql_operation`.
+
 ## v0.1.0 to v0.2.0
 
 There is a breaking change between v0.1.0 and v0.2.0 regarding the configuration of graphql queries, variables and context.
