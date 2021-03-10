@@ -3,6 +3,7 @@ module Queries
     type [Types::Response::Character], null: false
 
     argument :name, String, required: false
+    argument :friend, [Types::Response::Character], null: false, required: false
 
     def resolve(name: nil)
       data = [
