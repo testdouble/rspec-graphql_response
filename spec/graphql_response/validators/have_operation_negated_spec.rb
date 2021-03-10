@@ -1,5 +1,5 @@
 RSpec.describe RSpec::GraphQLResponse, "#have_operation validator", type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query CharacterList {
       characters {
         id

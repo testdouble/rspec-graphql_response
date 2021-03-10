@@ -23,7 +23,7 @@ it "does stuff" do
 end
 ```
 
-It's not a huge difference, but when you consider how well the `operation` method handles `nil` and 
+It's not a huge difference, but when you consider how well the `operation` method handles `nil` and
 operation results that are not found, it's well worth the few lines of savings.
 
 There are many other helpers available for your test suites, as well. Be sure to check the full
@@ -51,15 +51,14 @@ RSpec::GraphQLResponse.add_helper :operation do |operation_name|
 end
 ```
 
-In this example, the `response` helper is used, which guarantees the graphql has been executed and a response 
+In this example, the `response` helper is used, which guarantees the graphql has been executed and a response
 is available, assuming there were no exceptions preventing that.
 
 ## Add a Context Helper
 
 In addition to Spec level helpers, RSpec::GraphQLResponse allows you to add custom helpers at the context
 level. This means you can add configuration and other bits that can be called outside of an `it` block.
-The existing `graphql_query` and other DSL methods for configuring graphql calls are a great example of
-context level helpers.
+The existing `graphql_operation` and other DSL methods for configuring graphql calls are a great example of context level helpers.
 
 To create a context helper, call `RSpec::GraphQLResponse.add_context_helper(name, &helper_block)`. The params
 are the same as `.add_helper`, but the resulting method will be made available in `describe` and `context`
@@ -73,7 +72,7 @@ end
 
 In this simple example, a method called `my_setting` is created, and it stores a value in the instance variable
 `@my_setting`. This takes advantage of RSpec's native ability to handle instance variables in describe and
-context blocks, allowing the variable to exist withing the hierarchy of objects for a given spec. 
+context blocks, allowing the variable to exist withing the hierarchy of objects for a given spec.
 
 With that defined, it can be used within a spec:
 

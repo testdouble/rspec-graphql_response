@@ -8,7 +8,7 @@ RSPec.describe Cool::Stuff, type: :graphql do
   let(:user) { create(:graphql_user) }
   let(:search_name) { "Pet" }
 
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query SomeThing($name: String) {
       characters(name: $name) {
         id
@@ -16,7 +16,7 @@ RSPec.describe Cool::Stuff, type: :graphql do
       }
     }
   GQL
-  
+
   graphql_variables do
     {
       name: search_name
@@ -37,7 +37,7 @@ end
 
 ## Available Configuration Methods
 
-### `graphql_query`
+### `graphql_operation`
 
 A string - most commonly a ruby heredoc - for the graphql query to execute
 

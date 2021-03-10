@@ -30,40 +30,45 @@ Or install it yourself as:
 
 ## Full Documentation
 
-* [Release Notes](/RELEASE_NOTES.md)
-* [Upgrade Guide](/UPGRADE.md)
+- [Release Notes](/RELEASE_NOTES.md)
+- [Upgrade Guide](/UPGRADE.md)
 
 The full documentation for RSpec::GraphQLResponse can be found in the `/docs` folder.
 
 Configuration:
-* [RSpec::GraphQLResponse.configure](/docs/configuration.md)
-* [Spec Type :graphql](/docs/graphql_spec_type.md)
+
+- [RSpec::GraphQLResponse.configure](/docs/configuration.md)
+- [Spec Type :graphql](/docs/graphql_spec_type.md)
 
 Custom Matchers:
-* [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
-* [have_operation](/docs/have_operation.md) - validates the presence of a specified graphql operation in the graphql response
+
+- [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
+- [have_operation](/docs/have_operation.md) - validates the presence of a specified graphql operation in the graphql response
 
 Context / Describe Helper Methods:
-* [graphql_query](/docs/execute_graphql.md) - the query to execute
-* [graphql_variables](/docs/execute_graphql.md) - a hash of variables the query expects
-* [graphql_context](/docs/execute_graphql.md) - the `context` of a query or mutation's resolver
+
+- [graphql_operation](/docs/execute_graphql.md) - the query to execute
+- [graphql_variables](/docs/execute_graphql.md) - a hash of variables the query expects
+- [graphql_context](/docs/execute_graphql.md) - the `context` of a query or mutation's resolver
 
 Spec Helper Methods:
-* [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
-* [response](/docs/response.md) - the response, as JSON, of the executed graphql query
-* [operation](/docs/operation.md) - retrieves the results of a named operation from the GraphQL response
+
+- [execute_graphql](/docs/execute_graphql.md) - executes a graphql call with the registered schema, query, variables and context
+- [response](/docs/response.md) - the response, as JSON, of the executed graphql query
+- [operation](/docs/operation.md) - retrieves the results of a named operation from the GraphQL response
 
 API / Development
-* [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the GraphQLResponse matchers
-* [.add_validator](/docs/add_validator.md) - add a custom validator to be used by the custom matchers
-* [.add_helper](/docs/add_helper.md) - add helper methods to your specs, made avialable in `it` or `describe` / `context` blocks
+
+- [.add_matcher](/docs/add_matcher.md) - add a custom RSpec matcher to the GraphQLResponse matchers
+- [.add_validator](/docs/add_validator.md) - add a custom validator to be used by the custom matchers
+- [.add_helper](/docs/add_helper.md) - add helper methods to your specs, made avialable in `it` or `describe` / `context` blocks
 
 ## Getting Started
 
-There are only a couple of bits you need to get started: 
+There are only a couple of bits you need to get started:
 
-* configuration of a GraphQL Schema in [`RSpec::GraphQLResponse.configure`](/docs/configuration.md)
-* the inclusion of [`type: :graphql`](/docs/graphql_spec_type.md) in your `RSpec.describe` call
+- configuration of a GraphQL Schema in [`RSpec::GraphQLResponse.configure`](/docs/configuration.md)
+- the inclusion of [`type: :graphql`](/docs/graphql_spec_type.md) in your `RSpec.describe` call
 
 ```ruby
 RSpec::GraphQLResponse.configure do |config|
@@ -114,7 +119,7 @@ in your specs.
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query ListCharacters{
       characters {
         id
@@ -138,7 +143,7 @@ way. The reduce this, `RSpec::GraphQLResponse` provides a built-in `response` he
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query ListCharacters{
       characters {
         id
@@ -165,7 +170,7 @@ nested hash checking, use the built-in `operation` method to retrieve the `chara
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query ListCharacters{
       characters {
         id
@@ -178,7 +183,7 @@ RSpec.describe Some::Thing, type: :graphql do
     characters = operation(:characters)
 
     expect(characters).to include(
-      # ... 
+      # ...
     )
   end
 end

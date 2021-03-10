@@ -8,7 +8,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#operation", type: :graphql do
   end
 
   context "graphql response with data" do
-    graphql_query <<-GQL
+    graphql_operation <<-GQL
       query {
         characters {
           id,

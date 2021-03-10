@@ -2,7 +2,7 @@
 
 ## v0.1.0 to v0.2.0
 
-There is a breaking change between v0.1.0 and v0.2.0 regarding the configuration of graphql queries, variables and context. 
+There is a breaking change between v0.1.0 and v0.2.0 regarding the configuration of graphql queries, variables and context.
 Previously, you defined these three items with `let` in rspec:
 
 ```ruby

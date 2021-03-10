@@ -1,5 +1,5 @@
 RSpec.describe RSpec::GraphQLResponse, "matcher#have_operation", type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query CharacterList {
       characters {
         id
