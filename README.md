@@ -47,7 +47,7 @@ Custom Matchers:
 
 Context / Describe Helper Methods:
 
-- [graphql_operation](/docs/execute_graphql.md) - the query to execute
+- [graphql_operation](/docs/execute_graphql.md) - the operation to execute (i.e query or mutation)
 - [graphql_variables](/docs/execute_graphql.md) - a hash of variables the query expects
 - [graphql_context](/docs/execute_graphql.md) - the `context` of a query or mutation's resolver
 
