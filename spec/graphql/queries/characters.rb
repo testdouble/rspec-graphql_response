@@ -10,22 +10,22 @@ module Queries
           "id" => "1",
           "name" => "Jam",
           "friends" => [
-            { "name" => "Redemption" }
+            { "id" => "2", "name" => "Redemption" }
           ]
         },
         {
           "id" => "2",
           "name" => "Redemption",
           "friends" => [
-            { "name" => "Pet" },
-            { "name" => "Jam" }
+            { "id" => "1", "name" => "Jam" },
+            { "id" => "3", "name" => "Pet" }
           ]
         },
         {
           "id" => "3",
           "name" => "Pet",
           "friends" => [
-            { "name" => "Redemption" }
+            { "id" => "2", "name" => "Redemption" }
           ]
         }
       ]

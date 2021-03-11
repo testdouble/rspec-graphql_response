@@ -1,10 +1,11 @@
 RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query {
       characters {
         id,
         name,
         friends {
+          id
           name
         }
       }
@@ -19,22 +20,22 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
             "id" => "1",
             "name" => "Jam",
             "friends" => [
-              { "name" => "Redemption" }
+              { "id" => "2", "name" => "Redemption" }
             ]
           },
           {
             "id" => "2",
             "name" => "Redemption",
             "friends" => [
-              { "name" => "Pet" },
-              { "name" => "Jam" }
+              { "id" => "1", "name" => "Jam" },
+              { "id" => "3", "name" => "Pet" }
             ]
           },
           {
             "id" => "3",
             "name" => "Pet",
             "friends" => [
-              { "name" => "Redemption" }
+              { "id" => "2", "name" => "Redemption" }
             ]
           }
         ]
@@ -47,20 +48,38 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
           "id" => "1",
           "name" => "Jam",
           "friends" => [
-            { "name" => "Redemption" }
+            { "id" => "2", "name" => "Redemption" }
           ]
         },
         {
           "id" => "2",
           "name" => "Redemption",
           "friends" => [
-            { "name" => "Pet" },
-            { "name" => "Jam" }
+            { "id" => "1", "name" => "Jam" },
+            { "id" => "3", "name" => "Pet" }
           ]
         },
         {
           "id" => "3",
           "name" => "Pet",
+          "friends" => [
+            { "id" => "2", "name" => "Redemption" }
+          ]
+        }
+      )
+    end
+
+    it "can dig into an Array at the specified index" do
+      expect(response_data characters: [1], friends: [0]).to include(
+        { "name" => "Pet" },
+      )
+    end
+
+    it "can shape the response" do
+      expect(response_data characters: [0], friends: [:name]).to include(
+        {
+          "id" => "1",
+          "name" => "Jam",
           "friends" => [
             { "name" => "Redemption" }
           ]
