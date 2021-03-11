@@ -1,5 +1,5 @@
 RSpec.describe RSpec::GraphQLResponse, "graphql_variables helper", type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query CharacterList($name: String) {
       characters(name: $name) {
         id

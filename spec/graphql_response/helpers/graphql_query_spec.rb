@@ -1,5 +1,5 @@
-RSpec.describe RSpec::GraphQLResponse, "graphql_query helper", type: :graphql do
-  graphql_query <<-GQL
+RSpec.describe RSpec::GraphQLResponse, "graphql_operation helper", type: :graphql do
+  graphql_operation <<-GQL
     query CharacterList {
       characters {
         id
@@ -35,7 +35,7 @@ RSpec.describe RSpec::GraphQLResponse, "graphql_query helper", type: :graphql do
   end
 
   context "proc as value" do
-    graphql_query do
+    graphql_operation do
       <<-GQL
         query CharacterList {
           characters {

@@ -7,7 +7,7 @@ retrieving the operation's results.
 
 ```ruby
 RSpec.describe My::Characters, type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query CharacterList {
       characters {
         id
@@ -28,7 +28,7 @@ end
 
 ```ruby
 RSpec.describe My::Characters, type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query CharacterList {
       characters {
         id

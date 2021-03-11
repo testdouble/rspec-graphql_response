@@ -1,5 +1,5 @@
 RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
-  graphql_query <<-GQL
+  graphql_operation <<-GQL
     query {
       characters {
         id,
