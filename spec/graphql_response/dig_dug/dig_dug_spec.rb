@@ -31,7 +31,7 @@ RSpec.describe RSpec::GraphQLResponse::DigDug do
   let(:dig_pattern) { nil }
 
   subject(:dig) do
-    dig_dug = described_class.new(dig_pattern)
+    dig_dug = described_class.new(*dig_pattern)
     dig_dug.dig(response)
   end
 
