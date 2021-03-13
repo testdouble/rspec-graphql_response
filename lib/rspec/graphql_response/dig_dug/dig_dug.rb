@@ -33,20 +33,21 @@ module RSpec
         pattern_config = pattern.map do |pattern_item|
           if pattern_item.is_a? Symbol 
             {
-                type: :symbol,
-                key: pattern_item
-              }
-          elsif pattern_item.is_a? Hash
-            pattern_key = pattern_item.keys[0]
-            pattern_value = pattern_item.values[0][0]
-
-            {
-              type: :array,
-              key: pattern_key,
-              value: pattern_value
+              type: :symbol,
+              key: pattern_item
             }
+          elsif pattern_item.is_a? Hash
+            pattern_item.map do |key, value|
+              {
+                type: :array,
+                key: key,
+                value: value[0]
+              }
+            end
           end
         end
+
+        pattern_config.flatten
       end
 
       def dig_symbol(data, key)
