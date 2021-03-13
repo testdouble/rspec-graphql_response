@@ -18,26 +18,49 @@ module RSpec
         return data if patterns.empty?
 
         node = patterns[0]
-        result = node[:operation].call(data, node[:key])
+
+        if node[:type] == :symbol
+          result = dig_symbol(data, node[:key])
+        elsif node[:type] == :array
+          child_data = data[node[:key].to_s]
+          result = dig_symbol(child_data, node[:value])
+        end
 
         dig_data(result, patterns.drop(1))
       end
 
       def parse_dig_pattern(*pattern)
         pattern_config = pattern.map do |pattern_item|
-          {
-            key: pattern_item.to_s,
-            operation: self.method(:dig_symbol)
-          }
+          if pattern_item.is_a? Symbol 
+            {
+                type: :symbol,
+                key: pattern_item
+              }
+          elsif pattern_item.is_a? Hash
+            pattern_key = pattern_item.keys[0]
+            pattern_value = pattern_item.values[0][0]
+
+            {
+              type: :array,
+              key: pattern_key,
+              value: pattern_value
+            }
+          end
         end
       end
 
       def dig_symbol(data, key)
-        return data[key.to_s] if data.is_a? Hash
+        key = key.to_s if key.is_a? Symbol
+        return data[key] if data.is_a? Hash
 
         if data.is_a? Array
-          mapped_data = data.map { |value| value[key.to_s] }
-          return mapped_data.flatten
+          if key.is_a? Numeric
+            mapped_data = data[key]
+          else
+            mapped_data = data.map { |value| value[key] }.flatten
+          end
+
+          return mapped_data
         end
 
         return data
