@@ -107,7 +107,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
       expect(response_data characters: [0], friends: [:name]).to eq(["Redemption"])
     end
 
-    xit "can dig multiple nested levels of hash and Array" do
+    it "can dig multiple nested levels of hash and Array" do
       expect(response_data(:characters, {friends: [0]}, :name)).to eq "Jam"
     end
 
