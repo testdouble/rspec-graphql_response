@@ -79,7 +79,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
     end
 
     it "can dig through an array to nested fields" do
-      expect(response_data :characters, :friends).to include(
+      expect(response_data :characters, :friends, :name).to include(
         "Redemption",
         "Jam",
         "Pet"
