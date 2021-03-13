@@ -18,13 +18,24 @@ module RSpec
         return data if patterns.empty?
 
         node = patterns[0]
+        node_key = node[:key]
+        node_key = node_key.to_s if node_key.is_a? Symbol
+        node_value = node[:value]
 
         if node[:type] == :symbol
-          result = dig_symbol(data, node[:key])
+          result = dig_symbol(data, node_key)
         elsif node[:type] == :array
-          binding.pry
-          child_data = data[node[:key].to_s]
-          result = dig_symbol(child_data, node[:value])
+          if data.is_a? Hash
+            child_data = data[node_key]
+            result = dig_symbol(child_data, node_value)
+          elsif data.is_a? Array
+            result = data.map { |value|
+              child_data = value[node_key]
+              dig_symbol(child_data, node_value)
+            }.compact
+          else
+            result = data
+          end
         end
 
         dig_data(result, patterns.drop(1))
