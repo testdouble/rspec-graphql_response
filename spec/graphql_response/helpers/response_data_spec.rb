@@ -42,7 +42,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
       )
     end
 
-    it "can dig to a specific layer" do
+    it "can dig to the first layer" do
       expect(response_data :characters).to include(
         {
           "id" => "1",
@@ -66,6 +66,23 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
             { "id" => "2", "name" => "Redemption" }
           ]
         }
+      )
+    end
+
+    it "can dig through an array" do
+      expect(response_data :characters, :friends).to include(
+        { "id" => "2", "name" => "Redemption" },
+        { "id" => "1", "name" => "Jam" },
+        { "id" => "3", "name" => "Pet" },
+        { "id" => "2", "name" => "Redemption" }
+      )
+    end
+
+    it "can dig through an array to nested fields" do
+      expect(response_data :characters, :friends).to include(
+        "Redemption",
+        "Jam",
+        "Pet"
       )
     end
 
