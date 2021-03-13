@@ -88,7 +88,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
 
     it "can dig into an Array at the specified index" do
       expect(response_data characters: [1], friends: [0]).to include(
-        { "name" => "Pet" },
+        { "id" => "3", "name" => "Pet" },
       )
     end
 
