@@ -135,10 +135,10 @@ RSpec.describe RSpec::GraphQLResponse::DigDug do
   end
 
   context "dig multiple nested levels of hash and Array" do
-    let(:dig_pattern) { [:characters, {friends: [0]}, :name] }
+    let(:dig_pattern) { [:characters, {friends: [1]}, :name] }
 
     it "returns the correct data" do
-      expect(dig).to eq "Jam"
+      expect(dig).to eq ["Pet"]
     end
   end
 end
