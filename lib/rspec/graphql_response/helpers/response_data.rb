@@ -15,10 +15,17 @@ RSpec::GraphQLResponse.add_helper :response_data do |*fields|
     # handle `characters: [1]` for arrays of values
     # handle `characters: [:friends]` for a hash within arrays
     if field.is_a? Hash
-      hash_keys = field.keys
-      first_key = hash_keys[0]
-      data_value = data[first_key.to_s]
-      data = dig_deep.call(data_value, 1, hash_keys)
+      field.each do |key, value|
+        data_value = data[key.to_s]
+
+        value = value[0]
+        value = value.to_s if value.is_a? Symbol
+
+        data_value = data_value.map {|h| h[value]} if value.is_a? String
+        data_value = data_value[value] if value.is_a? Numeric
+        data = data_value
+      end
+
       return data
     end
 
@@ -33,6 +40,8 @@ RSpec::GraphQLResponse.add_helper :response_data do |*fields|
   end
 
   dig_deep = ->(data, field_index, field_list) do
+    return data if field_list.nil?
+
     field_count = field_list.count
     return data if field_index >= field_count
 
@@ -41,5 +50,6 @@ RSpec::GraphQLResponse.add_helper :response_data do |*fields|
   end
     
   result = dig_deep.call(response_data, 0, fields.compact)
-  Array(result).flatten
+  result = result.flatten if result.is_a? Array
+  result
 end
