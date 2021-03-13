@@ -108,8 +108,7 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
     end
 
     it "can dig multiple nested levels of hash and Array" do
-      expect(response_data(:characters, {friends: [0]}, :name)).to eq "Jam"
+      expect(response_data(:characters, {friends: [1]}, :name)).to eq(["Pet"])
     end
-
   end
 end
