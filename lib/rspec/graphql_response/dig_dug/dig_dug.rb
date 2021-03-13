@@ -22,6 +22,7 @@ module RSpec
         if node[:type] == :symbol
           result = dig_symbol(data, node[:key])
         elsif node[:type] == :array
+          binding.pry
           child_data = data[node[:key].to_s]
           result = dig_symbol(child_data, node[:value])
         end

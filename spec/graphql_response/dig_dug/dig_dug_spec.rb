@@ -124,6 +124,16 @@ RSpec.describe RSpec::GraphQLResponse::DigDug do
     end
   end
 
+  context "dig indexed item of value from hash that came through an array" do
+    let(:dig_pattern) { [:characters, friends: [1]] }
+
+    it "returns the correct data" do
+      expect(dig).to include(
+        { "id" => "3", "name" => "Pet" }
+      )
+    end
+  end
+
   context "dig multiple nested levels of hash and Array" do
     let(:dig_pattern) { [:characters, {friends: [0]}, :name] }
 
