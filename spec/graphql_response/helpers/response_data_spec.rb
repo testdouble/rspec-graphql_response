@@ -87,13 +87,29 @@ RSpec.describe RSpec::GraphQLResponse, "helper#response", type: :graphql do
     end
 
     it "can dig into an Array at the specified index" do
+      expect(response_data characters: [1]).to eq(
+        "id" => "2",
+        "name" => "Redemption",
+        "friends" => [
+          { "id" => "1", "name" => "Jam" },
+          { "id" => "3", "name" => "Pet" }
+        ]
+      )
+    end
+
+    it "can dig multiple levels into an Array at the specified index" do
       expect(response_data characters: [1], friends: [0]).to include(
         { "id" => "1", "name" => "Jam" },
       )
     end
 
-    it "can shape the response" do
+    it "can dig into a Hash that came through an Array" do
       expect(response_data characters: [0], friends: [:name]).to eq(["Redemption"])
     end
+
+    xit "can dig multiple nested levels of hash and Array" do
+      expect(response_data(:characters, {friends: [0]}, :name)).to eq "Jam"
+    end
+
   end
 end
