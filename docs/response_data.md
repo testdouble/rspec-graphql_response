@@ -7,7 +7,7 @@ and all layers of hash and array.
 ## Syntax
 
 ```ruby
-response_data *dig_pattern
+response_data *[dig_pattern]
 ```
 
 Data returned via this helper will assume a `"data" => ` key at the root of
@@ -16,19 +16,23 @@ of attributes for the `dig_pattern`.
 
 ### Params
 
-* \*dig_pattern - an array of attributes (symbol, string, or key/value pair) that describes
+* `*[dig_pattern]` - an array of attributes (`:symbol`, `"string"`, or `key: :value` pair) that describes
 the data structure to dig through, and thefinal data set to retrieve from the graphql response.
 
 #### dig_pattern
 
 Each attribute added to the `dig_pattern` represents an attribute at the given level of the
-data structure. 
+data structure, in numeric order from left to right. The first attribute provides will dig into
+that attribute at the first level of data (just below the `"data" =>` key). The second attribute
+will dig through data just below that first level, etc. etc. etc.
 
 For example, with a data structure as shown below, in "Basic Use", you could specifiy these
 attributes for the dig pattern:
 
 * :characters
 * :name
+
+Like this:
 
 ```ruby
 response_data :characters, :name
