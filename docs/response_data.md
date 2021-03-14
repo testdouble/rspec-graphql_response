@@ -4,6 +4,41 @@ The `response_data` helper will dig through a graphql response, through
 the outer hash, into the response data for an operation, and through any
 and all layers of hash and array. 
 
+## Syntax
+
+```ruby
+response_data *dig_pattern
+```
+
+Data returned via this helper will assume a `"data" => ` key at the root of
+the `response` object. This root does not need to be specified in the list
+of attributes for the `dig_pattern`.
+
+### Params
+
+* \*dig_pattern - an array of attributes (symbol, string, or key/value pair) that describes
+the data structure to dig through, and thefinal data set to retrieve from the graphql response.
+
+#### dig_pattern
+
+Each attribute added to the `dig_pattern` represents an attribute at the given level of the
+data structure. 
+
+For example, with a data structure as shown below, in "Basic Use", you could specifiy these
+attributes for the dig pattern:
+
+* :characters
+* :name
+
+```ruby
+response_data :characters, :name
+```
+
+This dig pattern will find the `"characters"` key just below `"data"`, then iterate through
+the array of characters and retrieve the `"name"` of each character.
+
+For more details and options for the dig pattern, see the examples below.
+
 ## Basic Use
 
 A `response` data structure may look something like the following.
