@@ -1,1 +1,1 @@
-# Check the GraphQL Response with Helper `response`
+# The GraphQL Response, via Helper `response`
