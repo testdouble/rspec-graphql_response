@@ -17,7 +17,7 @@ of attributes for the `dig_pattern`.
 ### Params
 
 * `*[dig_pattern]` - an array of attributes (`:symbol`, `"string"`, or `key: :value` pair) that describes
-the data structure to dig through, and thefinal data set to retrieve from the graphql response.
+the data structure to dig through, and the final data set to retrieve from the graphql response.
 
 #### dig_pattern
 
