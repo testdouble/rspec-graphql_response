@@ -8,15 +8,25 @@ module Queries
       data = [
         {
           "id" => "1",
-          "name" => "Jam"
+          "name" => "Jam",
+          "friends" => [
+            { "id" => "2", "name" => "Redemption" }
+          ]
         },
         {
           "id" => "2",
-          "name" => "Redemption"
+          "name" => "Redemption",
+          "friends" => [
+            { "id" => "1", "name" => "Jam" },
+            { "id" => "3", "name" => "Pet" }
+          ]
         },
         {
           "id" => "3",
-          "name" => "Pet"
+          "name" => "Pet",
+          "friends" => [
+            { "id" => "2", "name" => "Redemption" }
+          ]
         }
       ]
 

@@ -5,6 +5,7 @@ module Types
 
       field :id, ID, null: false
       field :name, String, null: false
+      field :friends, [Character], null: false
     end
   end
 end

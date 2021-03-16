@@ -1,5 +1,6 @@
 require "rspec"
 
+require_relative "graphql_response/dig_dug/dig_dug"
 require_relative "graphql_response/version"
 require_relative "graphql_response/configuration"
 require_relative "graphql_response/validators"
