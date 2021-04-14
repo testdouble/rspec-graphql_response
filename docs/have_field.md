@@ -1,4 +1,4 @@
-# Validate a response operation with `have_operation(name)`
+# Validate a response operation with `have_field(name)`
 
 Check for the presence of an operation's results. Useful when you want to ensure an operation exists before
 retrieving the operation's results.
@@ -18,7 +18,7 @@ RSpec.describe My::Characters, type: :graphql do
 
   it "has the characters" do
 
-    expect(response).to have_operation(:characters)
+    expect(response).to have_field(:characters)
 
   end
 end
@@ -39,7 +39,7 @@ RSpec.describe My::Characters, type: :graphql do
 
   it "does not have books" do
 
-    expect(response).to_not have_operation(:books)
+    expect(response).to_not have_field(:books)
 
   end
 end

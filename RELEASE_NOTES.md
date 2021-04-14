@@ -4,6 +4,11 @@ Release notes for various versions of RSpec::GraphQLResponse
 
 See [the upgrade guide](/UPGRADE.md) for details on changes between versions and how to upgrade.
 
+## v0.5.0 - Helper API change
+
+- Fully deprecates `operation`.
+- Renames `have_operation` to `have_field` to clarify its use.
+
 ## v0.4.0 - Helper API change
 
 ### Breaking Changes

@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphQLResponse, "matcher#have_operation", type: :graphql do
+RSpec.describe RSpec::GraphQLResponse, "matcher#have_field", type: :graphql do
   graphql_operation <<-GQL
     query CharacterList {
       characters {
@@ -12,14 +12,14 @@ RSpec.describe RSpec::GraphQLResponse, "matcher#have_operation", type: :graphql 
     it "is valid" do
       expect(response).to_not have_errors
 
-      expect(response).to have_operation(:characters)
+      expect(response).to have_field(:characters)
     end
 
     it "is invalid when negated" do
       expect(response).to_not have_errors
 
       expect { 
-        expect(response).to_not have_operation(:characters)
+        expect(response).to_not have_field(:characters)
       }.to raise_error(/Expected not to find operation result named characters/)
     end
   end
@@ -29,14 +29,14 @@ RSpec.describe RSpec::GraphQLResponse, "matcher#have_operation", type: :graphql 
       expect(response).to_not have_errors
 
       expect {
-        expect(response).to have_operation(:operation_not_present)
+        expect(response).to have_field(:operation_not_present)
       }.to raise_error(/Expected to find operation result named operation_not_present/)
     end
 
     it "is valid when negated" do
       expect(response).to_not have_errors
 
-      expect(response).to_not have_operation(:operation_not_present)
+      expect(response).to_not have_field(:operation_not_present)
     end
   end
 end

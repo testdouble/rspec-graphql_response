@@ -1,4 +1,4 @@
-RSpec.describe RSpec::GraphQLResponse, "#have_operation validator", type: :graphql do
+RSpec.describe RSpec::GraphQLResponse, "#have_field validator", type: :graphql do
   graphql_operation <<-GQL
     query CharacterList {
       characters {
@@ -11,7 +11,7 @@ RSpec.describe RSpec::GraphQLResponse, "#have_operation validator", type: :graph
   let(:operation_name) { nil }
 
   subject(:result) do
-    validator = RSpec::GraphQLResponse.validator :have_operation
+    validator = RSpec::GraphQLResponse.validator :have_field
     validator.validate_negated(response, operation_name: operation_name)
   end
 
