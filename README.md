@@ -43,7 +43,7 @@ Configuration:
 Custom Matchers:
 
 - [have_errors](/docs/have_errors.md) - validates errors, or lack of, on the GraphQL response
-- [have_operation](/docs/have_operation.md) - validates the presence of a specified graphql operation in the graphql response
+- [have_field](/docs/have_field.md) - validates the presence of a specified graphql operation in the graphql response
 
 Context / Describe Helper Methods:
 
@@ -162,11 +162,11 @@ RSpec.describe Some::Thing, type: :graphql do
 end
 ```
 
-#### Retrieve operation results with `operation`
+#### Retrieve response results with `response_data`
 
 Now that the GraphQL query has been executed and a response has been obtained, it's time to check for the results of a GraphQL
 operation. In the previous example, the spec is expecting to find `data` with `characters` in the response hash. To reduce the
-nested hash checking, use the built-in `operation` method to retrieve the `characters`:
+nested hash checking, use the built-in `response_data` method to retrieve the `characters`:
 
 ```ruby
 RSpec.describe Some::Thing, type: :graphql do
@@ -180,18 +180,17 @@ RSpec.describe Some::Thing, type: :graphql do
   GQL
 
   it "executes the query" do
-    characters = operation(:characters)
-
-    expect(characters).to include(
+    expect(response_data :characters).to include(
       # ...
     )
   end
 end
 ```
 
-Note the lack of `response` use here. Internally, the `operation` method uses the `response` to obtain the data requested. This
+Note the lack of `response` use here. Internally, the `response_data` method uses the `response` to obtain the data requested. This
 means the entire chain of operations from executing the GraphQL request, to converting the response into a hash, and digging
-through the results to find the correction operation, has been handled behind the scenes.
+through the results to find the correction operation, has been handled behind the scenes. To see more examples of how to use
+`response_data` dig through your response check out it's full documenation [here.](/docs/response_data.md)
 
 ## Development
 

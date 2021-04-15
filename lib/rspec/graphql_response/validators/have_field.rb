@@ -1,4 +1,4 @@
-RSpec::GraphQLResponse.add_validator :have_operation do
+RSpec::GraphQLResponse.add_validator :have_field do
   failure_message :nil, "Cannot evaluate operations on nil"
   failure_message :not_found, ->(expected, actual) { "Expected to find operation result named #{expected}, but did not find it\n\t#{actual}" }
 

@@ -46,6 +46,5 @@ require_relative "helpers/graphql_variables"
 
 # spec level helpers
 require_relative "helpers/execute_graphql"
-require_relative "helpers/operation"
 require_relative "helpers/response"
 require_relative "helpers/response_data"
