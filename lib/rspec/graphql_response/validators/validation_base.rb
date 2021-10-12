@@ -17,18 +17,18 @@ module RSpec
           end
         end
 
-        def validate(response, *args)
+        def validate(response, **args)
           validate_method = self.class.instance_variable_get(:@validate_method)
 
           runner = ValidationRunner.new(self)
-          runner.instance_exec(response, *args, &validate_method)
+          runner.instance_exec(response, **args, &validate_method)
         end
 
-        def validate_negated(response, *args)
+        def validate_negated(response, **args)
           validate_negated_method = self.class.instance_variable_get(:@validate_negated_method)
 
           runner = ValidationRunner.new(self)
-          runner.instance_exec(response, *args, &validate_negated_method)
+          runner.instance_exec(response, **args, &validate_negated_method)
         end
 
         def failure_message(type)
