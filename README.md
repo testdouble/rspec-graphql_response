@@ -85,7 +85,7 @@ does, and what methods and options are available.
 
 ## How We Got Here
 
-Executing a GraphQL call from RSpec is not the most challening code to write:
+Executing a GraphQL call from RSpec is not the most challenging code to write:
 
 ```ruby
 let(:query) do
