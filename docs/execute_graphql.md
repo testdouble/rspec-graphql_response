@@ -23,7 +23,7 @@ RSPec.describe Cool::Stuff, type: :graphql do
     }
   end
 
-  grapql_context do
+  graphql_context do
     {
       current_user: user
     }
