@@ -18,7 +18,7 @@ Ensure there are no errors in the `response`
 
 ```ruby
 it "should not have errors" do
-  expect(response).to_not have_errors
+  expect(response).not_to have_errors
 end
 ```
 
@@ -37,13 +37,13 @@ Ensure the response does not have a specific number of errors.
 
 ```ruby
 it "should not have 2 errors" do
-  expect(response).to_not have_errors(2)
+  expect(response).not_to have_errors(2)
 end
 ```
 
 ### CAUTION: False Positives
 
-Using `.to have_errors(count)` and especially using `.to_not have_errors(count)` is
+Using `.to have_errors(count)` and especially using `.not_to have_errors(count)` is
 potentially dangerous! 
 
 Your test may be ensuring there are not 2 errors, but the underlying code may fail
@@ -70,13 +70,13 @@ This will ensure the `response["errors"]` contains a "User not found" error mess
 
 ```ruby
 it "does not raise User not found" do
-  expect(response).to_not have_errors.with_messages("User not found")
+  expect(response).not_to have_errors.with_messages("User not found")
 end
 ```
 
 ### Fails if Specified Error Found in Array
 
-The `.to_not` form of `.with_messages` will ensure that none of the error messages
+The `.not_to` form of `.with_messages` will ensure that none of the error messages
 specified are found withing the response.
 
 If, for example the response looks like this:
@@ -94,7 +94,7 @@ a test like this would fail:
 
 ```ruby
 it "looks for specific errors" do
-  expect(response).to_not have_errors.with_messages("User not found", "Some other errors")
+  expect(response).not_to have_errors.with_messages("User not found", "Some other errors")
 end
 ```
 
@@ -104,7 +104,7 @@ messages would be ignored.
 
 ### CAUTION: False Positives
 
-Using `.to_not have_errors.with_messages("Some Message")` is a good way to
+Using `.not_to have_errors.with_messages("Some Message")` is a good way to
 ensure your code is not throwing a specific error message. However, it should
 not be the only expectation against the response. If your code raises any errors
 other than the ones specified, it will result in a passing test but a response
