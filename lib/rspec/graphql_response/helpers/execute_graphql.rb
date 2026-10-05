@@ -10,8 +10,9 @@ RSpec::GraphQLResponse.add_helper :execute_graphql do
   operation_context = graphql_context if respond_to? :graphql_context
   operation_context = self.instance_eval(&operation_context) if operation_context.is_a? Proc
 
-  config.graphql_schema.execute(operation, {
+  config.graphql_schema.execute(
+    operation,
     variables: operation_vars,
     context: operation_context
-  })
+  )
 end
