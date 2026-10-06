@@ -1,14 +1,16 @@
 name: Test rspec-graphql_response
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
+on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.2", "3.3", "3.4", "4.0"]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
       with:
+        ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - run: bin/rspec

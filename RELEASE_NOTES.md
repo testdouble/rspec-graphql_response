@@ -4,6 +4,11 @@ Release notes for various versions of RSpec::GraphQLResponse
 
 See [the upgrade guide](/UPGRADE.md) for details on changes between versions and how to upgrade.
 
+## Unreleased - Ruby 3.2+ required
+
+- Supports and is tested against Ruby 3.2, 3.3, 3.4, and 4.0. Older Rubies are no longer supported.
+- Fixes keyword argument handling for Ruby 3+ (`execute_graphql` and validators) [#12](https://github.com/testdouble/rspec-graphql_response/issues/12).
+
 ## v0.5.0 - Helper API change
 
 - Fully deprecates `operation`.
