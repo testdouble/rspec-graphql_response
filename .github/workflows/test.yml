@@ -1,8 +1,5 @@
 name: Test rspec-graphql_response
-on:
-  push:
-    branches: [ main ]
-  pull_request:
+on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
